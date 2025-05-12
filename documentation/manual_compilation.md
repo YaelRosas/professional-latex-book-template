@@ -1,4 +1,4 @@
-
+recuerda cambiar de idioma eso
 Documentación de compilación LaTeX con latexmk en VSCode
 ---------------------------------------------------------
 
