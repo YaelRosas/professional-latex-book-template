@@ -1,0 +1,81 @@
+\documentclass{styles/my_class}         % Clase personalizada 
+\usepackage{styles/custom-style}     % Cargar el estilo desde 'config/mi_estilo.sty'
+ 
+%=== Glosario===
+ % --- Definir glosario personalizado ---en caso de no usarlo puedes solo no imprimir el ejemplo comentandolo(Esta en la seccion material de referencia de este archivo)
+ \newglossary[glgcon]{constantes}{glscon}{glocon}{Glosario Definido por el usuario}%(Si cambias el nombre tambien hazlo en las definiciones de glosarios /tex/03-Referencia_Configuracion/02-definicion_glosarios)
+ \input{tex/03-Referencia_Configuracion/02-definicion_glosarios.tex}  % Carga las definiciones de glosario
+ \makeglossaries
+
+%=== Bibliografia===
+ \addbibresource{tex/03-Referencia_Configuracion/01-references.bib} % Base de datos bibliograficos
+
+
+\begin{document}
+%=============================================================
+%=== Partes preliminares
+%=============================================================
+ 
+\thispagestyle{empty} % Sin numeración en esta página
+\let\cleardoublepage\clearpage % Para evitar la hoja en blanco que se genera al terminar en hoja impar 
+ \input{tex/01-Partes_preliminares/01-cover.tex} 
+ \input{tex/01-Partes_preliminares/02-halftitle.tex} 
+ \input{tex/01-Partes_preliminares/03-copyright.tex} 
+ \input{tex/01-Partes_preliminares/04-dedication.tex} 
+ \input{tex/01-Partes_preliminares/05-acknowledgements.tex} 
+ \frontmatter % Inicia numeración romana
+ \input{tex/01-Partes_preliminares/06-epigraph.tex}
+ \input{tex/01-Partes_preliminares/07-foreword.tex}
+ \input{tex/01-Partes_preliminares/08-preface.tex}
+ \input{tex/01-Partes_preliminares/09-contributors.tex}
+ \input{tex/01-Partes_preliminares/10-Notas_del_autor.tex}
+ \tableofcontents
+ \clearpage
+ \renewcommand{\listfigurename}{Lista de Figuras}
+ \listoffigures
+ \clearpage
+ \renewcommand{\listtablename}{Lista de Tablas}
+ \listoftables
+ 
+ \mainmatter % Inicia numeración arábiga
+
+%=============================================================
+%=== Cuerpo del libro
+%=============================================================
+ \let\cleardoublepage\clearpage % Para evitar la hoja en blanco que se genera al terminar en hoja impar 
+ \part{Contenido}
+ \input{tex/02-Cuerpo/00-introduction.tex}
+ \input{tex/02-Cuerpo/01-Capitulo_Ejemplos.tex}
+ \input{tex/02-Cuerpo/99-epilogue.tex}
+ 
+%=============================================================
+%=== Imprime material de referencia
+%=============================================================
+ \part{Material de referencia}
+ %=== Apendices===
+ 
+ \appendix
+ \input{tex/03-Referencia_Configuracion/03-definicion_apendices}
+ 
+ 
+ %=== Glosarios (puedes simplemente comentar lo que no uses)
+ 
+ \let\cleardoublepage\clearpage % Para evitar la hoja en blanco que se genera al terminar en hoja impar
+ \printglossary[type=acronym, title={Lista de abreviaciones}]
+ \let\cleardoublepage\clearpage % Para evitar la hoja en blanco que se genera al terminar en hoja impar
+ \printglossary[type=symbols, title={Glosario de símbolos}]
+ \let\cleardoublepage\clearpage % Para evitar la hoja en blanco que se genera al terminar en hoja impar
+ \printglossary[title={Glosario de términos}]
+ \let\cleardoublepage\clearpage % Para evitar la hoja en blanco que se genera al terminar en hoja impar
+ \printglossary[type=constantes, title={Constantes físicas}]
+ 
+ % Bibliografia
+ %\nocite{*} % Forza a imprimir todas las entradas de la bibliografia 
+ \let\cleardoublepage\clearpage % Para evitar la hoja en blanco que se genera al terminar en hoja impar
+ \printbibliography 
+ 
+ \clearpage
+ \input{tex/03-Referencia_Configuracion/04-colophon.tex}
+ 
+ 
+\end{document}

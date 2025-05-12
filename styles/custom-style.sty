@@ -1,0 +1,785 @@
+% Las configuraciones están organizadas por áreas sin un orden especifico
+% pero algunas opciones impactan varias secciones
+% Modificar el orden de alguna seccion o paquetes puede causar errores
+
+% El .sty debe contener configuraciones opcionales, estilos visuales o mejoras funcionales
+% Su propósito es complementar al .cls sin modificar la estructura base del documento
+% Permite modularizar aspectos como fuentes, estilos de título, colores o entornos personalizados
+% Ideal para adaptar el diseño visual o funcional a distintos documentos sin tocar la clase principal
+
+
+
+
+% Define los paquetes y configuraciones de estilo.
+\ProvidesPackage{custom-style}[2025/05/06 Estilo personalizado]
+
+\usepackage{titlesec}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{angles}
+\usetikzlibrary{quotes}
+\usetikzlibrary{arrows.meta}
+\tikzset{ 
+	every picture/.style={ 
+		line width=1pt, 
+		fill=orange, 
+		draw=violet, 
+		text=blue, 
+	}, 
+	>={Stealth[length=6pt,inset=2pt]} 
+}
+
+% Elimina configuraciones previas de títulos
+
+
+% Limpia la configuración previa de títulos de sección, subsección, etc.
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% Limpia la numeración de los encabezados
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{\CustomSectionFormat}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{\CustomSubsectionFormat}
+\titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries}{}{0pt}{\CustomSubsubsectionFormat}
+
+
+
+% ============================================================
+% 1-Lenguaje
+ \RequirePackage[T1]{fontenc} % Para acentos
+ \RequirePackage[spanish]{babel}
+ \RequirePackage{csquotes} % Comillas (Tambien se usa para las citas)
+
+% ============================================================
+% 2-Colores
+ % ===============================
+ % 2.1 Paquetes
+  \RequirePackage{pifont}
+  \RequirePackage{yfonts}
+  \RequirePackage{xcolor}
+  \RequirePackage{listings}
+  \RequirePackage{pagecolor}
+ 
+  % Hay colores predefinidos que se pueden usar directamente:
+  % black, white, red, green, blue, cyan, magenta, yellow,
+  % gray, brown, lime, olive, orange,
+  % pink, purple, teal, violet.
+ 
+ % ===============================
+ % 2.2 Definición de colores
+   % ===============
+   % 2.2.1 Para Colorbox
+     % =======
+     % 2.2.1.1 Observación/Nota
+      \definecolor{ObservationYellow}{RGB}{204,153,0}
+     % =======
+     % 2.2.1.2 Ejercicio
+      \definecolor{ExerciseBlue}{RGB}{51,102,204}         % base
+      \definecolor{ExerciseBlueLight}{RGB}{220,230,255}   % fondo suave
+      \definecolor{ExerciseBlueDark}{RGB}{30,60,150}      % borde / título
+      \definecolor{ExerciseAccent}{RGB}{20,40,120}        % detalles / overlay
+     % =======
+     % 2.2.1.3 Solución
+      \definecolor{SolutionBlue}{RGB}{102,153,204}      % base 
+      \definecolor{SolutionBlueLight}{RGB}{187,212,235} % fondo suave
+      \definecolor{SolutionBlueDark}{RGB}{51,102,153}   % título y borde intensos
+      \definecolor{SolutionAccent}{RGB}{0,102,153}      % detalles / overlay
+     % =======
+     % 2.2.1.4 Definición
+      \definecolor{DefinitionTeal}{RGB}{0,153,153}         % base
+      \definecolor{DefinitionTealLight}{RGB}{204,255,255}  % fondo suave
+      \definecolor{DefinitionTealDark}{RGB}{0,102,102}     % título y borde intensos
+      \definecolor{DefinitionAccent}{RGB}{0,77,77}         % detalles / overlay   
+     % =======
+     % 2.2.1.5 Ejemplo
+      \definecolor{ExampleTurquoise}{RGB}{0,204,204}        % base
+      \definecolor{ExampleTurquoiseLight}{RGB}{204,255,255} % fondo suave
+      \definecolor{ExampleTurquoiseDark}{RGB}{0,153,153}    % borde / título
+      \definecolor{ExampleAccent}{RGB}{0,102,102}           % detalles / overlay
+     % =======
+     % 2.2.1.6 Teorema
+      \definecolor{TheoremRed}{RGB}{153,0,51}             % base
+      \definecolor{TheoremRedLight}{RGB}{255,204,221}     % fondo suave
+      \definecolor{TheoremRedDark}{RGB}{102,0,34}         % borde / título
+      \definecolor{TheoremAccent}{RGB}{77,0,26}           % detalles / overlay        
+     % =======
+     % 2.2.1.7 Actividad
+      \definecolor{ActivityOrange}{RGB}{255,102,0}        % base
+      \definecolor{ActivityOrangeLight}{RGB}{255,204,153} % fondo suave
+      \definecolor{ActivityOrangeDark}{RGB}{204,82,0}     % título y borde intensos
+      \definecolor{ActivityAccent}{RGB}{153,51,0}         % detalles / overlay
+     % =======
+     % 2.2.1.8 Generalidad
+      \definecolor{GeneralityGray}{RGB}{153,153,153}      % base
+      \definecolor{GeneralityGrayLight}{RGB}{230,230,230} % fondo suave
+      \definecolor{GeneralityGrayDark}{RGB}{102,102,102}  % borde / título
+      \definecolor{GeneralityAccent}{RGB}{51,51,51}       % detalles / overlay
+     % =======
+     % 2.2.1.9 Propiedad
+      \definecolor{PropertyGreen}{RGB}{0,102,51}          % base
+      \definecolor{PropertyGreenLight}{RGB}{204,255,229}  % fondo suave
+      \definecolor{PropertyGreenDark}{RGB}{0,80,40}       % borde / título
+      \definecolor{PropertyAccent}{RGB}{0,60,30}          % detalles / overlay
+     % =======
+     % 2.2.1.10 Resumen
+      \definecolor{SummaryGray}{RGB}{85,85,85}            % base
+      \definecolor{SummaryGrayLight}{RGB}{240,240,240}    % fondo suave
+      \definecolor{SummaryGrayDark}{RGB}{60,60,60}        % borde / título
+      \definecolor{SummaryAccent}{RGB}{50,50,50}          % detalles / overlay
+     % =======
+     % 2.2.1.11 Advertencia
+      \definecolor{WarningOrange}{RGB}{255,140,0}         % base
+      \definecolor{WarningOrangeLight}{RGB}{255,235,204}  % fondo suave
+      \definecolor{WarningOrangeDark}{RGB}{180,90,0}      % borde / título
+      \definecolor{WarningAccent}{RGB}{140,70,0}          % detalles / overlay
+     % =======
+
+   % ===============
+   % 2.2.2 Para fondo del documento
+    \definecolor{oatpaper}    {RGB}{230, 230, 230} 
+    \definecolor{softlatte}   {RGB}{240, 228, 210}
+    \definecolor{softegg}     {RGB}{255, 252, 244}
+   % ===============
+   % 2.2.2 Para Codigo Python
+    \definecolor{codegreen}   {rgb}{0.00, 0.60, 0.00}
+    \definecolor{codegray}    {rgb}{0.50, 0.50, 0.50}
+    \definecolor{codepurple}  {rgb}{0.58, 0.00, 0.82}
+    \definecolor{backcolor}   {rgb}{0.97, 0.97, 0.97}
+    \definecolor{codeblue}    {rgb}{0.20, 0.20, 0.60}
+   % =============== 
+   % 2.2.3 Titulos
+     % =======
+     % 2.2.3.1 Part
+      \definecolor{PartPurple}{RGB}{75,0,130}
+     % =======
+     % 2.2.3.1 *Chapter
+      \definecolor{AppendixTeal}{RGB}{128,128,128}
+      
+     % =======
+     % 2.2.3.1 Chapter
+      \definecolor{DarkPurple}{RGB}{102,51,153}
+     % =======
+     % 2.2.3.1 Section
+      \definecolor{SectionPlum}{RGB}{102,102,204}
+     % =======
+     % 2.2.3.1 subsection
+      \definecolor{SubsectionIndigo}{RGB}{153,102,204}
+     % =======
+     % 2.2.3.1 subsubsection
+      \definecolor{SubsubsectionLavender}{RGB}{0,153,153}
+    % =======
+
+% ============================================================
+% 3-Colorbox 
+  % ===============================
+  % 3.1 Configuraciones
+    \RequirePackage[many]{tcolorbox} % Carga el paquete con soporte extendido para múltiples cajas anidadas.
+    \tcbset{
+        colframe=magenta,                   % Color del borde
+        colback=magenta!12!white,           % Color del fondo
+        breakable,                          % Permite que la caja se divida en varias páginas
+        enhanced,                           % Habilita características avanzadas
+        % sharp corners,                    % se usa globalmente para bordes rectos
+        boxsep=1pt,                         % Espacio entre contenido y borde
+        attach boxed title to top left={     % Posiciona el título arriba a la izquierda
+            yshift=-\tcboxedtitleheight,  
+            yshifttext=-.75\baselineskip     % Ajuste vertical del texto
+        },
+        boxed title style={                 % Estilo para el título de la caja
+            boxsep=1pt                       % Espacio entre el borde y el título
+        },
+        fonttitle=\bfseries\sffamily,       % Fuente del título en negrita y sans-serif
+        drop lifted shadow                  % Efecto de sombra levantada
+    }
+  
+  % ===============================
+  % 3.2 Definiciones de colorbox
+   % ========
+   % 3.2.1 Ejercicio
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{exercise}[1][]{
+     arc=4pt,
+     title={Ejercicio },
+     colframe=ExerciseBlueDark,
+     colback=ExerciseBlueLight,
+     coltitle=black,
+     boxed title style={colback=ExerciseBlue},
+     overlay unbroken and first={
+         \node[below right,font=\small,color=ExerciseAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+    }
+   % ========
+   % 3.2.2 Solution
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{solution}[1][]{
+     arc=4pt,
+     title={Solución },
+     colframe=SolutionBlueDark,
+     colback=SolutionBlueLight,
+     coltitle=white,
+     boxed title style={colback=SolutionBlue},
+     overlay unbroken and first={
+         \node[below right,font=\small,color=SolutionAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+     }
+   % ========
+   % 3.2.3 Definition
+
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{definition}[1][]{
+     arc=4pt,
+     title={Definición },
+     colframe=DefinitionTealDark,
+     colback=DefinitionTealLight,
+     coltitle=white,
+     boxed title style={colback=DefinitionTeal},
+     overlay unbroken and first={
+         \node[below right,font=\small,color=DefinitionAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+    } 
+   % ========
+   % 3.2.4 Example
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{example}[1][]{
+      arc=4pt,
+      title={Ejemplo },
+      colframe=ExampleTurquoiseDark,
+      colback=ExampleTurquoiseLight,
+      coltitle=black,
+      boxed title style={colback=ExampleTurquoise},
+      overlay unbroken and first={
+          \node[below right,font=\small,color=ExampleAccent,text width=.8\linewidth]
+          at (title.north east) {#1};
+      }
+     }
+   %========
+   % 3.2.6 Theorem
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{theorem}[1][]{
+     arc=4pt,
+     title={Teorema},
+     colframe=TheoremRedDark,
+     colback=TheoremRedLight,
+     coltitle=white,
+     boxed title style={colback=TheoremRed},
+     overlay unbroken and first={
+         \node[below right,font=\small,color=TheoremAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+    }
+
+   %========
+   % 3.2.7 Activity
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{activity}[1][]{
+     arc=4pt,
+     title={Actividad },
+     colframe=ActivityOrangeDark,
+     colback=ActivityOrangeLight,
+     coltitle=white,
+     boxed title style={colback=ActivityOrange},
+     overlay unbroken and first={
+         \node[below right,font=\small,color=ActivityAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+    }
+   %========
+   % 3.2.8 Generality
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{generality}[1][]{
+     arc=4pt,
+     title={Generalidad},
+     colframe=GeneralityGrayDark,
+     colback=GeneralityGrayLight,
+     coltitle=black,
+     boxed title style={colback=GeneralityGray},
+     overlay unbroken and first={
+         \node[below right,font=\small,color=GeneralityAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+    }
+
+   %========
+   % 3.2.9 Property
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{property}[1][]{
+     arc=4pt,
+     title={Propiedad},
+     colframe=PropertyGreenDark,
+     colback=PropertyGreenLight,
+     coltitle=black,
+     boxed title style={colback=PropertyGreen},
+     overlay unbroken and first={
+         \node[below right,font=\small,color=PropertyAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+    }
+   %========
+   % 3.2.10 Resumen
+    \newtcolorbox[auto counter,number within=chapter,number format=\arabic]{summary}[1][]{
+     arc=4pt,
+     title={\textbf{Resumen}},
+     colframe=SummaryGrayDark,
+     colback=SummaryGrayLight,
+     coltitle=black,
+     %?
+     fonttitle=\bfseries\sffamily,
+     fontupper=\sffamily,
+     %
+     boxed title style={
+         colback=SummaryGray,
+     },
+     overlay unbroken and first={
+      \node[below right,font=\small,color=SummaryAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+    }
+   %========
+   % 3.2.11 Observacion
+       \newtcolorbox{remark}[1][]{
+        arc=4pt, % Esquinas redondeadas con radio de 4pt
+        title={\raisebox{-.2ex}{\ding{43}}~\textbf{Remark}}, % Título con ícono y texto
+        colframe=yellow!45!white, % Color del borde
+        colback=yellow!45!white,  % Color de fondo
+        coltitle=blue,            % Color del texto del título
+        fontupper=\sffamily,      % Fuente del contenido dentro del cuadro
+        boxed title style={       % Estilo del recuadro del título
+            colback=yellow!45!white, % Fondo del recuadro del título
+            boxsep=1ex,              % Espaciado interno del recuadro
+            arc=4pt                  % Esquinas redondeadas del título
+        },
+        overlay unbroken and first={ % Contenido adicional que se superpone
+            \node[below right,font=\normalsize,color=red,text width=.8\linewidth]
+            at (title.north east) {#1}; % Inserta el argumento opcional como nota en esquina superior derecha
+        }
+       }
+   
+   %========
+   % 3.2.12 Nota
+      \newtcolorbox{note}[1][]{
+       arc=4pt, % Esquinas redondeadas
+       title={\raisebox{-.2ex}{\ding{45}}~\textbf{Note}}, % Título con ícono y texto
+       colframe=yellow!45!white, % Borde del cuadro
+       colback=yellow!45!white,  % Fondo del cuadro
+       coltitle=blue,            % Color del título
+       %fonttitle=\bfseries\sffamily, % Fuente del título
+       %fontupper=\frfamily,          % Fuente del contenido dentro del cuadro
+       boxed title style={           % Estilo del recuadro del título
+           colback=yellow!45!white,  % Fondo del recuadro del título
+           boxsep=1ex,               % Espaciado interno
+           arc=4pt                   % Esquinas redondeadas
+       },
+       overlay unbroken and first={ % Nota opcional alineada a la derecha del título
+           \node[below right,font=\normalsize,color=red,text width=.8\linewidth]
+           at (title.north east) {#1};
+       }
+     }
+   
+   %========
+   % 3.2.13 Advertencia
+    \newtcolorbox{warnbox}[1][]{
+     arc=4pt,
+     title={\textbf{Advertencia}},
+     colframe=WarningOrangeDark,
+     colback=WarningOrangeLight,
+     coltitle=black,
+     fonttitle=\bfseries\sffamily,
+     fontupper=\sffamily,
+     boxed title style={
+         colback=WarningOrange,
+     },
+     overlay unbroken and first={
+      \node[below right,font=\small,color=WarningAccent,text width=.8\linewidth]
+         at (title.north east) {#1};
+     }
+    }
+   %=======
+
+% ============================================================
+% 4-Fondo de documento     
+ \pagecolor{oatpaper}          % Cambia el color de fondo del PDF
+ \color{black}              % Color del texto (asegúrate que sea legible)
+        
+% ============================================================
+% 5-Tabla de Contenidos
+
+ % Modifica la entrada de capítulos en el indice
+ \def\l@chapter#1#2{%
+ \ifnum \c@tocdepth >\m@ne              % Si el nivel de indice permite mostrar capítulos
+     \addpenalty{-\@highpenalty}%       % Añade una penalización negativa para evitar saltos de página aquí
+     \vskip 1.0em \@plus\p@             % Espacio vertical antes del capítulo
+     \setlength\@tempdima{1.5em}%       % Define sangría temporal
+     \begingroup
+         \parindent \z@                % Sin sangría
+         \rightskip \@pnumwidth        % Margen derecho reservado para número de página
+         \parfillskip -\@pnumwidth     % Ajuste para alineación derecha
+         \leavevmode \bfseries         % Texto en negrita
+         \advance\leftskip\@tempdima   % Aplica la sangría izquierda
+         \hskip -\leftskip             % Corrige la posición por la sangría
+         % Muestra "Capítulo <nombre>" en color, sans serif, negrita
+         \textcolor{black}{\bfseries\sffamily \chaptername~#1}\nobreak\hfil
+         % Número de página en azul, alineado a la derecha
+         \nobreak\hb@xt@\@pnumwidth{\hss\color{black}#2}\par
+         \penalty\@highpenalty         % Alta penalización para evitar cortes de página
+     \endgroup
+ \fi}
+ 
+ 
+ % Ajustes generales del indice
+ \def\@pnumwidth{6ex}     % Ancho reservado para los números de página
+ \def\@dotsep{.25}        % Separación entre puntos en las líneas punteadas
+ 
+ % Define el formato general de líneas punteadas del indice
+ \def\@dottedtocline#1#2#3#4#5{ 
+ \ifnum #1>\c@tocdepth \else            % Solo muestra si el nivel está permitido
+ \vskip \z@ \@plus.2\p@                 % Espacio opcional antes
+
+ {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+     \parindent #2\relax\@afterindenttrue
+     \interlinepenalty\@M               % Evita cortes de línea
+     \leavevmode
+     \@tempdima #3\relax
+     \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+     % Texto del título, sans serif, negrita
+     \color{black}\bfseries\sffamily #4\nobreak
+     % Líneas punteadas hasta el número de página
+     \leaders\hbox{$\m@th
+         \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+         mu$}\hfill
+     \nobreak
+     % Número de página en negro
+     \hb@xt@\@pnumwidth{\hfil\normalfont\color{black}#5} 
+     \par} 
+ \fi}
+
+% ============================================================
+% 6-Formato visual del títulos
+  % ===============================
+  % Definicion
+    % ===============
+    % Parte
+      \newcommand{\CustomPartFormat}[1]{%
+      \vspace{2ex}
+      \begin{center}
+        \begin{tikzpicture}[remember picture, overlay, every node/.style={font=\Huge\bfseries\sffamily, align=center, text width=0.8\linewidth}]
+          \node[
+            rounded corners=2pt,
+            minimum height=6ex,
+            draw=PartPurple,
+            fill=PartPurple,
+            text=white,
+            line width=1pt,
+            anchor=center
+          ] at ([yshift=-5cm]current page.north) {#1};
+        \end{tikzpicture}%
+      \end{center}
+      \vspace{5ex}
+      }
+  
+  
+    % ===============
+    % Capítulo
+      \newcommand{\CustomChapterFormat}[1]{
+      \vspace{2ex}
+      \begin{tikzpicture}[overlay, every node/.style={font=\LARGE\bfseries\sffamily}]
+        \node[
+          right,
+          rounded corners=2pt,
+          minimum height=6ex,
+          draw=DarkPurple,
+          fill=DarkPurple,
+          text=white,
+          line width=1pt
+        ](chapter) at (0,0) {\chaptername~\thechapter};
+        \node[right, text=DarkPurple] at (chapter.east) {#1};
+        \draw[very thick, color=DarkPurple]
+          ([xshift=0.3mm, yshift=-0.3mm]chapter.north west)
+          -- ([xshift=\linewidth]chapter.north west);
+      \end{tikzpicture}
+      \vspace{5ex}
+      }
+    % ===============
+    % Capítulo*
+      \newcommand{\CustomUnnumberedChapterFormat}[1]{
+        \vspace{2ex}
+        \begin{tikzpicture}[overlay, every node/.style={font=\large\bfseries\sffamily}]
+          \node[
+            right,
+            rounded corners=2pt,
+            minimum height=5ex,
+            draw=AppendixTeal,
+            fill=AppendixTeal,
+            text=white,
+            line width=1pt,
+            text width=\linewidth-2em,
+            align=left
+          ] at (0,0) {#1};
+        \end{tikzpicture}
+        \vspace{4ex}
+      }
+
+    % ===============
+    % Sección
+     \newcommand{\CustomSectionFormat}[1]{%
+       \vspace{2ex}
+       \begin{tikzpicture}[overlay, every node/.style={font=\normalsize\bfseries\sffamily, text=white, align=left}]
+         \node[
+           rounded corners=2pt,
+           draw=SectionPlum,
+           fill=SectionPlum,
+           line width=1pt,
+           inner xsep=0.5em,
+           inner ysep=0.4em,
+           anchor=west
+         ] at (0,0) {\thesection\quad#1};
+       \end{tikzpicture}
+       \vspace{1ex}
+     }
+ 
+
+    % ===============
+    % Subsección
+      \newcommand{\CustomSubsectionFormat}[1]{
+        \vspace{2ex}
+        \begin{tikzpicture}[every node/.style={font=\small\bfseries\sffamily, align=left}]
+          \node[
+            rounded corners=2pt,
+            draw=SubsectionIndigo,
+            fill=SubsectionIndigo,
+            text=white,
+            line width=1pt,
+            inner xsep=0.6em,
+            inner ysep=0.4em
+          ] {#1};
+        \end{tikzpicture}
+        \vspace{1ex}
+      }
+
+    % ===============
+    % Subsubsección
+     \newcommand{\CustomSubsubsectionFormat}[1]{
+       \vspace{1.5ex}
+       \begin{tikzpicture}[overlay, every node/.style={font=\footnotesize\bfseries\sffamily}]
+         \node[
+           right,
+           rounded corners=2pt,
+           minimum height=2.5ex,
+           draw=SubsubsectionLavender,
+           fill=SubsubsectionLavender,
+           text=white,
+           line width=0.8pt,
+           inner xsep=1ex,
+           inner ysep=0.5ex
+         ] at (0,0) {#1};
+       \end{tikzpicture}
+       \vspace{2ex}
+     }
+
+  
+    % ===============
+    % Parrafo
+    % ===============
+    % Subparrafo
+    % ===============
+
+  % ===============================
+  % Aplica el formato usando titlesec
+    % ===============
+    % Parte
+     \titleformat{\part}[display]{\normalfont\Huge\bfseries\color{PartPurple}}{\partname~\thepart}{0pt}{\hspace{1em}}[\vspace{1ex}\titlerule]
+    % ===============
+    % Capitulo
+      \titleformat{\chapter}[display]{\normalfont}{}{0pt}{\CustomChapterFormat}
+    % ===============
+    % 7-Capítulos*
+     \titleformat{name=\chapter,numberless}{\normalfont}{}{0pt}{\CustomUnnumberedChapterFormat}
+     % Introducción (sección sin número personalizada)
+
+     % Apéndice
+     %\titleformat{\chapter}[display]{\normalfont\Huge\bfseries\color{AppendixTeal}}{Apéndice~\thechapter}{20pt}{\hspace{1em}}[\vspace{1ex}\titlerule]
+    % ===============
+    % Seccion
+      \titleformat{\section}[block]{\normalfont}{}{0pt}{\CustomSectionFormat}
+    % ===============
+    % Subseccion
+      \titleformat{\subsection}[block]{\normalfont}{}{0pt}{\CustomSubsectionFormat}
+    % ===============
+    % Subsubseccion
+     \titleformat{\subsubsection}{\normalfont}{\thesubsubsection}{0pt}{\CustomSubsubsectionFormat}
+    % ===============
+    % Parrafo
+    % ===============
+    % Subparrafo
+    % ===============
+ 
+% ============================================================
+% 12-Elimina configuraciones previas de títulos
+
+ % Limpia la configuración previa de títulos de sección, subsección, etc.
+ \titleformat{\part}[block]{\normalfont\Huge\bfseries}{\thepart}{1em}{}
+ \titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+ \titleformat{\subsection}[block]{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+ \titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+ %\titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+ %\titleformat{\subparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
+
+ % Limpia la numeración de los encabezados
+ \titleformat{\part}[block]{\normalfont\Huge\bfseries}{}{0pt}{\CustomPartFormat}
+ \titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{\CustomSectionFormat}
+ \titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{\CustomSubsectionFormat}
+ \titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries}{}{0pt}{\CustomSubsubsectionFormat}
+ %\titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0pt}{\CustomParagraphFormat}
+ %\titleformat{\subparagraph}[runin]{\normalfont\normalsize\bfseries}{}{0pt}{\CustomSubparagraphFormat}
+% ============================================================
+% 13-hipervinculos
+ \RequirePackage{hyperref}
+  \hypersetup{ 
+      linktoc=all, 
+      bookmarksnumbered, 
+      bookmarksopen, 
+      hidelinks}
+  \RequirePackage{bookmark}
+  \bookmarksetup{
+      addtohook={ 
+          \ifnum\bookmarkget{level}=0 
+          \bookmarksetup{color=red} 
+          \fi 
+          \ifnum\bookmarkget{level}=1 
+          \bookmarksetup{color=blue} 
+          \fi 
+          \ifnum\bookmarkget{level}=2 
+          \bookmarksetup{color=teal} 
+          \fi}}
+ 
+
+% ============================================================
+% 14- Captions de figuras y Tablas\RequirePackage{caption}
+  \RequirePackage{subcaption}
+  \DeclareCaptionFont{custom}{\color{darkgray}\sffamily}
+  \captionsetup{
+      font=small,
+      skip=4pt,
+      labelfont=custom,
+      textfont=custom,
+      labelsep=colon
+  }
+  \captionsetup[sub]{
+      font=footnotesize,
+      skip=2pt,
+      labelfont=custom,
+      textfont=custom,
+      labelsep=colon
+  }
+
+% ============================================================
+% 15-Configuración de pies de página y encabezados
+  \setlength{\intextsep}{4pt}        % espacio vertical entre texto y figuras/tablas flotantes
+  \setlength{\textfloatsep}{6pt}     % espacio entre texto y floats en la parte superior/inferior
+  \setlength{\floatsep}{4pt}         % espacio entre dos floats consecutivos
+  \allowdisplaybreaks[2]             % permite saltos en ecuaciones, nivel moderado
+
+% ============================================================
+
+% ============================================================
+% 20-Nota Pie de pagina
+ \def\footnoterule{\kern -3pt\textcolor{blue}{\hrule width \linewidth height 0.4pt}\kern 2.6pt}
+ \def\thefootnote{\color{black}\bfseries\sffamily(\arabic{footnote})}
+
+% ============================================================
+% 21-Cambiar todas las matemáticas en línea a display math
+ \everymath{\color{blue}\displaystyle}
+
+
+% ============================================================
+% 23-Pie de pagina
+ \raggedbottom
+ \def\preparelabel{El Echicero mas fuerte de la actualidad}
+ 
+ \let\ps@origin\ps@plain
+ \def\ps@plain{
+   \let\@oddhead\@empty
+   \let\@evenhead\@oddhead
+   \def\@oddfoot{
+     \textcolor{DarkPurple}{\footnotesize\itshape\preparelabel} 
+     \hfil\tikz[baseline=-0.8ex]{\node[sharp corners,inner sep=3pt,fill=DarkPurple,text=white,font=\normalsize\bfseries\sffamily,text width=4ex,align=center]{\thepage};}
+     \hfil\textcolor{DarkPurple}{\footnotesize\itshape El Echicero mas fuerte de la historia}}
+   \def\@evenfoot{
+     \textcolor{DarkPurple}{\footnotesize\itshape El Echicero mas fuerte de la historia}
+     \hfil\tikz[baseline=-0.8ex]{\node[sharp corners,inner sep=3pt,fill=DarkPurple,text=white,font=\normalsize\bfseries\sffamily,text width=4ex,align=center]{\thepage};}
+     \hfil\textcolor{DarkPurple}{\footnotesize\itshape\preparelabel} 
+   }
+ }
+
+
+% ============================================================
+% 24-Desactiva la numeracion
+ %\setcounter{secnumdepth}{0}
+
+% ============================================================
+% 25-Imagen de fondo
+\pagestyle{fancy}
+\fancyhf{}
+%\fancyfoot[C]{
+% \begin{tikzpicture}[remember picture,overlay]
+%   \node[anchor=south east, yshift=-1.5mm, xshift=1.5mm] at (current page.south east) {\includegraphics[height=29mm]{images/banner.png}};
+% \end{tikzpicture}
+% \textcolor{gray}{\thepage}
+%}
+\usepackage{eso-pic}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\textcolor{gray}{\thepage}}
+
+%\AddToShipoutPictureBG*{
+%  \put(\LenToUnit{\dimexpr\paperwidth-30mm},0){%
+%    \includegraphics[height=29mm]{images/banner.png}%
+%  }
+%}
+
+% ============================================================
+% 26-Definición de estilo Codigo
+  % ==============================
+  % Python
+    \lstdefinestyle{py}{
+        backgroundcolor=\color{backcolor},
+        commentstyle=\color{codegreen},
+        keywordstyle=\color{codepurple}\bfseries,
+        numberstyle=\tiny\color{codegray},
+        stringstyle=\color{codepurple},
+        basicstyle=\ttfamily,
+        breaklines=true,
+        captionpos=b,
+        keepspaces=true,
+        numbers=left,
+        numbersep=5pt,
+        showspaces=false,
+        showstringspaces=false,
+        tabsize=4
+    }
+   
+    \lstset{language=Python, style=py}
+  % ==============================
+  % Latex
+   \lstdefinestyle{latexstyle}{
+       backgroundcolor=\color{backcolor},
+       commentstyle=\color{codegreen}\itshape,
+       keywordstyle=\color{codeblue}\bfseries,
+       numberstyle=\tiny\color{codegray},
+       stringstyle=\color{codepurple},
+       basicstyle=\ttfamily\footnotesize,
+       breaklines=true,
+       captionpos=b,
+       keepspaces=true,
+       numbers=left,
+       numbersep=5pt,
+       showspaces=false,
+       showstringspaces=false,
+       showtabs=false,
+       tabsize=2,
+       language=[LaTeX]TeX
+   }
+   
+   \lstset{style=latexstyle}
+   
+% ============================================================
+  
+
+
+

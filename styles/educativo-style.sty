@@ -1,0 +1,134 @@
+% Las configuraciones están organizadas por áreas sin un orden especifico
+% pero algunas opciones impactan varias secciones
+% Modificar el orden de alguna seccion o paquetes puede causar errores
+
+% El .sty debe contener configuraciones opcionales, estilos visuales o mejoras funcionales
+% Su propósito es complementar al .cls sin modificar la estructura base del documento
+% Permite modularizar aspectos como fuentes, estilos de título, colores o entornos personalizados
+% Ideal para adaptar el diseño visual o funcional a distintos documentos sin tocar la clase principal
+
+
+
+
+% Define los paquetes y configuraciones de estilo.
+
+\ProvidesPackage{custom-style}[2025/05/06 Estilo personalizado]
+
+ 
+
+\RequirePackage{tikz}
+
+
+
+% --------------------------------------------------
+% 1-Lenguaje
+
+ \RequirePackage[T1]{fontenc} % Para acentos
+ \RequirePackage[spanish]{babel}
+ \RequirePackage{csquotes} % Comillas (Tambien se usa para las citas)
+ 
+% --------------------------------------------------
+% 2-Colores generales
+  \RequirePackage{xcolor}
+  \RequirePackage{listings}
+  \RequirePackage{pagecolor}
+ 
+ % Hay colores predefinidos que se pueden usar directamente:
+ % black, white, red, green, blue, cyan, magenta, yellow,
+ % gray, darkgray, lightgray, brown, lime, olive, orange,
+ % pink, purple, teal, violet.
+ 
+ %%% Definición de colores
+ %sujerencias para fondo del documento
+  \definecolor{oatpaper}    {RGB}{230, 230, 230} 
+  \definecolor{softlatte}   {RGB}{240, 228, 210}
+  \definecolor{softegg}     {RGB}{255, 252, 244}
+ 
+  \definecolor{codegreen}   {rgb}{0.00, 0.60, 0.00}
+  \definecolor{codegray}    {rgb}{0.50, 0.50, 0.50}
+  \definecolor{codepurple}  {rgb}{0.58, 0.00, 0.82}
+  \definecolor{backcolor}   {rgb}{0.97, 0.97, 0.97}
+  \definecolor{codeblue}    {rgb}{0.20, 0.20, 0.60}
+  
+  \pagecolor{oatpaper}          % Cambia el color de fondo del PDF
+  \color{black}              % Color del texto (asegúrate que sea legible)
+  
+ %------------------Color Set--------------------------
+ \definecolor{LightBlue}{RGB}{66, 163, 251}
+ \definecolor{DarkBlue}{RGB}{36, 100, 176}
+ \definecolor{LightGray}{gray}{.94}
+ \definecolor{DarkGray}{gray}{.172}
+ \definecolor{Orange}{RGB}{229, 133, 3}
+ \definecolor{MediumBlue}{RGB}{38, 119, 193}
+
+
+%------------------Section Default Setting-------------
+\titleformat*{\section}{\color{DarkBlue}\normalfont\bfseries\Huge}
+\titleformat*{\subsection}{\color{LightBlue}\normalfont\bfseries\LARGE}
+\titleformat*{\subsubsection}{\color{MediumBlue}\normalfont\bfseries\LARGE}
+
+%-------------------Section Numbers Removal------------
+\setcounter{secnumdepth}{0}
+
+
+%-------------------------Header & Footer------------------------
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{
+\begin{tikzpicture}[remember picture,overlay] \node[anchor=north west, yshift=1.5mm, xshift=-1.5mm] at (current page.north west) {\includegraphics[height=25mm]{images/header_corner.png}};
+\end{tikzpicture}
+}
+\fancyfoot[C]{
+\begin{tikzpicture}[remember picture,overlay] \node[anchor=south east, yshift=-1.5mm, xshift=1.5mm] at (current page.south east) {\includegraphics[height=29mm]{images/banner.png}};
+\end{tikzpicture}
+\textcolor{LightGray}{\thepage}
+}
+
+% --------------------------------------------------
+% 16- %%% Definición de estilo Codigo
+
+ %%% Python
+ \lstdefinestyle{py}{
+     backgroundcolor=\color{backcolor},
+     commentstyle=\color{codegreen},
+     keywordstyle=\color{codepurple}\bfseries,
+     numberstyle=\tiny\color{codegray},
+     stringstyle=\color{codepurple},
+     basicstyle=\ttfamily,
+     breaklines=true,
+     captionpos=b,
+     keepspaces=true,
+     numbers=left,
+     numbersep=5pt,
+     showspaces=false,
+     showstringspaces=false,
+     tabsize=4
+ }
+
+ \lstset{language=Python, style=py}
+ 
+ %%% Latex
+ \lstdefinestyle{latexstyle}{
+     backgroundcolor=\color{backcolor},
+     commentstyle=\color{codegreen}\itshape,
+     keywordstyle=\color{codeblue}\bfseries,
+     numberstyle=\tiny\color{codegray},
+     stringstyle=\color{codepurple},
+     basicstyle=\ttfamily\footnotesize,
+     breaklines=true,
+     captionpos=b,
+     keepspaces=true,
+     numbers=left,
+     numbersep=5pt,
+     showspaces=false,
+     showstringspaces=false,
+     showtabs=false,
+     tabsize=2,
+     language=[LaTeX]TeX
+ }
+ 
+ \lstset{style=latexstyle}
+ 
+% --------------------------------------------------
+  
