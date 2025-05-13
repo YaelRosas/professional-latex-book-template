@@ -31,7 +31,6 @@
 
 % Elimina configuraciones previas de títulos
 
-
 % Limpia la configuración previa de títulos de sección, subsección, etc.
 \titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}[block]{\normalfont\large\bfseries}{\thesubsection}{1em}{}
@@ -391,61 +390,61 @@
    %=======
 
 % ============================================================
-% 4-Fondo de documento     
+% 4-Fondo de documento
  \pagecolor{oatpaper}          % Cambia el color de fondo del PDF
  \color{black}              % Color del texto (asegúrate que sea legible)
         
 % ============================================================
 % 5-Tabla de Contenidos
-
- % Modifica la entrada de capítulos en el indice
- \def\l@chapter#1#2{%
- \ifnum \c@tocdepth >\m@ne              % Si el nivel de indice permite mostrar capítulos
-     \addpenalty{-\@highpenalty}%       % Añade una penalización negativa para evitar saltos de página aquí
-     \vskip 1.0em \@plus\p@             % Espacio vertical antes del capítulo
-     \setlength\@tempdima{1.5em}%       % Define sangría temporal
-     \begingroup
-         \parindent \z@                % Sin sangría
-         \rightskip \@pnumwidth        % Margen derecho reservado para número de página
-         \parfillskip -\@pnumwidth     % Ajuste para alineación derecha
-         \leavevmode \bfseries         % Texto en negrita
-         \advance\leftskip\@tempdima   % Aplica la sangría izquierda
-         \hskip -\leftskip             % Corrige la posición por la sangría
-         % Muestra "Capítulo <nombre>" en color, sans serif, negrita
-         \textcolor{black}{\bfseries\sffamily \chaptername~#1}\nobreak\hfil
-         % Número de página en azul, alineado a la derecha
-         \nobreak\hb@xt@\@pnumwidth{\hss\color{black}#2}\par
-         \penalty\@highpenalty         % Alta penalización para evitar cortes de página
-     \endgroup
- \fi}
- 
- 
- % Ajustes generales del indice
- \def\@pnumwidth{6ex}     % Ancho reservado para los números de página
- \def\@dotsep{.25}        % Separación entre puntos en las líneas punteadas
- 
- % Define el formato general de líneas punteadas del indice
- \def\@dottedtocline#1#2#3#4#5{ 
- \ifnum #1>\c@tocdepth \else            % Solo muestra si el nivel está permitido
- \vskip \z@ \@plus.2\p@                 % Espacio opcional antes
-
- {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
-     \parindent #2\relax\@afterindenttrue
-     \interlinepenalty\@M               % Evita cortes de línea
-     \leavevmode
-     \@tempdima #3\relax
-     \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-     % Texto del título, sans serif, negrita
-     \color{black}\bfseries\sffamily #4\nobreak
-     % Líneas punteadas hasta el número de página
-     \leaders\hbox{$\m@th
-         \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
-         mu$}\hfill
-     \nobreak
-     % Número de página en negro
-     \hb@xt@\@pnumwidth{\hfil\normalfont\color{black}#5} 
-     \par} 
- \fi}
+  % ==============================
+  % Modifica la entrada de capítulos en el indice
+    \def\l@chapter#1#2{%
+    \ifnum \c@tocdepth >\m@ne              % Si el nivel de indice permite mostrar capítulos
+        \addpenalty{-\@highpenalty}%       % Añade una penalización negativa para evitar saltos de página aquí
+        \vskip 1.0em \@plus\p@             % Espacio vertical antes del capítulo
+        \setlength\@tempdima{1.5em}%       % Define sangría temporal
+        \begingroup
+            \parindent \z@                % Sin sangría
+            \rightskip \@pnumwidth        % Margen derecho reservado para número de página
+            \parfillskip -\@pnumwidth     % Ajuste para alineación derecha
+            \leavevmode \bfseries         % Texto en negrita
+            \advance\leftskip\@tempdima   % Aplica la sangría izquierda
+            \hskip -\leftskip             % Corrige la posición por la sangría
+            % Muestra "Capítulo <nombre>" en color, sans serif, negrita
+            \textcolor{black}{\bfseries\sffamily \chaptername~#1}\nobreak\hfil
+            % Número de página en azul, alineado a la derecha
+            \nobreak\hb@xt@\@pnumwidth{\hss\color{black}#2}\par
+            \penalty\@highpenalty         % Alta penalización para evitar cortes de página
+        \endgroup
+    \fi}
+    
+  % ==============================
+  % Ajustes generales del indice
+   \def\@pnumwidth{6ex}     % Ancho reservado para los números de página
+   \def\@dotsep{.25}        % Separación entre puntos en las líneas punteadas
+   
+   % Define el formato general de líneas punteadas del indice
+   \def\@dottedtocline#1#2#3#4#5{ 
+   \ifnum #1>\c@tocdepth \else            % Solo muestra si el nivel está permitido
+   \vskip \z@ \@plus.2\p@                 % Espacio opcional antes
+  
+   {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+       \parindent #2\relax\@afterindenttrue
+       \interlinepenalty\@M               % Evita cortes de línea
+       \leavevmode
+       \@tempdima #3\relax
+       \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+       % Texto del título, sans serif, negrita
+       \color{black}\bfseries\sffamily #4\nobreak
+       % Líneas punteadas hasta el número de página
+       \leaders\hbox{$\m@th
+           \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+           mu$}\hfill
+       \nobreak
+       % Número de página en negro
+       \hb@xt@\@pnumwidth{\hfil\normalfont\color{black}#5} 
+       \par} 
+   \fi}
 
 % ============================================================
 % 6-Formato visual del títulos
@@ -640,10 +639,10 @@
           \bookmarksetup{color=red} 
           \fi 
           \ifnum\bookmarkget{level}=1 
-          \bookmarksetup{color=blue} 
+          \bookmarksetup{color=red} 
           \fi 
           \ifnum\bookmarkget{level}=2 
-          \bookmarksetup{color=teal} 
+          \bookmarksetup{color=red} 
           \fi}}
  
 
@@ -673,7 +672,6 @@
   \setlength{\floatsep}{4pt}         % espacio entre dos floats consecutivos
   \allowdisplaybreaks[2]             % permite saltos en ecuaciones, nivel moderado
 
-% ============================================================
 
 % ============================================================
 % 20-Nota Pie de pagina
@@ -686,55 +684,79 @@
 
 
 % ============================================================
-% 23-Pie de pagina
- \raggedbottom
- \def\preparelabel{El Echicero mas fuerte de la actualidad}
- 
- \let\ps@origin\ps@plain
- \def\ps@plain{
-   \let\@oddhead\@empty
-   \let\@evenhead\@oddhead
-   \def\@oddfoot{
-     \textcolor{DarkPurple}{\footnotesize\itshape\preparelabel} 
-     \hfil\tikz[baseline=-0.8ex]{\node[sharp corners,inner sep=3pt,fill=DarkPurple,text=white,font=\normalsize\bfseries\sffamily,text width=4ex,align=center]{\thepage};}
-     \hfil\textcolor{DarkPurple}{\footnotesize\itshape El Echicero mas fuerte de la historia}}
-   \def\@evenfoot{
-     \textcolor{DarkPurple}{\footnotesize\itshape El Echicero mas fuerte de la historia}
-     \hfil\tikz[baseline=-0.8ex]{\node[sharp corners,inner sep=3pt,fill=DarkPurple,text=white,font=\normalsize\bfseries\sffamily,text width=4ex,align=center]{\thepage};}
-     \hfil\textcolor{DarkPurple}{\footnotesize\itshape\preparelabel} 
-   }
- }
-
-
-% ============================================================
 % 24-Desactiva la numeracion
  %\setcounter{secnumdepth}{0}
 
 % ============================================================
 % 25-Imagen de fondo
-\pagestyle{fancy}
-\fancyhf{}
-%\fancyfoot[C]{
-% \begin{tikzpicture}[remember picture,overlay]
-%   \node[anchor=south east, yshift=-1.5mm, xshift=1.5mm] at (current page.south east) {\includegraphics[height=29mm]{images/banner.png}};
-% \end{tikzpicture}
-% \textcolor{gray}{\thepage}
-%}
-\usepackage{eso-pic}
-\usepackage{graphicx}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot[C]{\textcolor{gray}{\thepage}}
+  \pagestyle{fancy}
+  \fancyhf{}
+  %\fancyfoot[C]{
+  % \begin{tikzpicture}[remember picture,overlay]
+  %   \node[anchor=south east, yshift=-1.5mm, xshift=1.5mm] at (current page.south east) {\includegraphics[height=29mm]{images/banner.png}};
+  % \end{tikzpicture}
+  % \textcolor{gray}{\thepage}
+  %}
+  \usepackage{eso-pic}
+  \usepackage{graphicx}
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \fancyfoot[C]{\textcolor{gray}{\thepage}}
+  
+  %\AddToShipoutPictureBG*{
+  %  \put(\LenToUnit{\dimexpr\paperwidth-30mm},0){%
+  %    \includegraphics[height=29mm]{images/banner.png}%
+  %  }
+  %}
+% ============================================================
+% 26-Cabecera
 
-%\AddToShipoutPictureBG*{
-%  \put(\LenToUnit{\dimexpr\paperwidth-30mm},0){%
-%    \includegraphics[height=29mm]{images/banner.png}%
-%  }
-%}
+ \pagestyle{fancy}
+ \fancyhf{} % limpia encabezado y pie
+ 
+ % Encabezado
+ \fancyhead[LO]{\textcolor{DarkPurple}{\footnotesize\itshape\leftmark}} % odd pages (derecha)
+ \fancyhead[RE]{\textcolor{DarkPurple}{\footnotesize\itshape\leftmark}} % even pages (izquierda)
+% ============================================================
+% 26-Pie de pagina
+
+  % ==============================
+  % Número de página centrado en recuadro
+    \fancyfoot[C]{%
+      \tikz[baseline=-0.8ex]{
+        \node[
+          sharp corners,
+          inner sep=3pt,
+          fill=DarkPurple,
+          text=white,
+          font=\normalsize\bfseries\sffamily,
+          text width=4ex,
+          align=center
+        ]{\thepage};
+      }
+    }
+  % ==============================  
+  % Frase pie de página en página impar 
+    %(izquierda)
+    \fancyfoot[LO]{%
+      \textcolor{DarkPurple}{\footnotesize\itshape Frase izquierda}
+    }
+    
+    % derecha
+    \fancyfoot[RE]{%
+      \textcolor{DarkPurple}{\footnotesize\itshape Frase derecha}
+    }
+    
+  % ==============================
+  % Para que los capítulos actualicen \leftmark correctamente
+    \renewcommand{\chaptermark}[1]{
+      \markboth{\thechapter\quad #1}{}
+    }
+  % ==============================
 
 % ============================================================
-% 26-Definición de estilo Codigo
+% 27-Definición de estilo Codigo
   % ==============================
   % Python
     \lstdefinestyle{py}{
@@ -779,7 +801,3 @@
    \lstset{style=latexstyle}
    
 % ============================================================
-  
-
-
-

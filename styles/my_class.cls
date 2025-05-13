@@ -228,7 +228,7 @@
 % 15-Hipervínculos (cargar despues de colores para evitar conflictos)
 
  
- \definecolor{linkblue}{rgb}{0.0, 0.0, 0.3}
+ \definecolor{linkblue}{rgb}{0.0, 0.6, 0.3}
  \definecolor{urlgreen}{rgb}{0.0, 0.6, 0.3}   
  
  \definecolor{citeorange}{rgb}{1.0, 0.38, 0.28}
