@@ -6,57 +6,58 @@
 % Su propósito es complementar al .cls sin modificar la estructura base del documento
 % Permite modularizar aspectos como fuentes, estilos de título, colores o entornos personalizados
 % Ideal para adaptar el diseño visual o funcional a distintos documentos sin tocar la clase principal
-\usepackage[utf8]{inputenc} % (solo necesario si usas pdfLaTeX)
+
+
+
+
+% Define los paquetes y configuraciones de estilo.
+\ProvidesPackage{custom-style}[2025/05/06 Estilo personalizado]
+
+\RequirePackage{titlesec}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{angles}
+\usetikzlibrary{quotes}
+\usetikzlibrary{arrows.meta}
+\tikzset{ 
+	every picture/.style={ 
+		line width=1pt, 
+		fill=orange, 
+		draw=violet, 
+		text=blue, 
+	}, 
+	>={Stealth[length=6pt,inset=2pt]} 
+}
 
 
 % ============================================================
-% 1-Paquetes
-  % Define los paquetes y configuraciones de estilo.
-  \ProvidesPackage{custom-style}[2025/05/06 Estilo personalizado]
-  \RequirePackage{pifont}
-  \RequirePackage{eso-pic}
-  \RequirePackage{graphicx}
-  \RequirePackage{fancyhdr}
-  \RequirePackage{hyperref}
-  \RequirePackage{subcaption}
-  \RequirePackage{yfonts}
-  \RequirePackage{xcolor}
-  \RequirePackage{listings}
-  \RequirePackage{pagecolor}
-  \RequirePackage[most,many]{tcolorbox} % necesario para \newtcblisting, many soporte para cajas anidadas 
-  \RequirePackage{bookmark}
-  \RequirePackage{titlesec}
-  \RequirePackage{tikz}
-  \usetikzlibrary{calc}
-  \usetikzlibrary{angles}
-  \usetikzlibrary{quotes}
-  \usetikzlibrary{arrows.meta}
-  \usepackage{titlesec} 
-  \tikzset{ 
-  	every picture/.style={ 
-  		line width=1pt, 
-  		fill=orange, 
-  		draw=violet, 
-  		text=blue, 
-  	}, 
-  	>={Stealth[length=6pt,inset=2pt]} 
-  }
-  
-
-% ============================================================
-% 2-Lenguaje
+% 1-Lenguaje
  \RequirePackage[T1]{fontenc} % Para acentos
  \RequirePackage[spanish]{babel}
  \RequirePackage{csquotes} % Comillas (Tambien se usa para las citas)
 
 % ============================================================
-% 3-Colores
-   % Hay colores predefinidos que se pueden usar directamente:
-   % black, white, red, green, blue, cyan, magenta, yellow,
-   % gray, brown, lime, olive, orange,
-   % pink, purple, teal, violet.
-   % ==============================
-   % 2.2.1 Colorbox
+% 2-Colores
+ % ===============================
+ % 2.1 Paquetes
+  \RequirePackage{pifont}
+  \RequirePackage{yfonts}
+  \RequirePackage{xcolor}
+  \RequirePackage{listings}
+  \RequirePackage{pagecolor}
+  \RequirePackage[most,many]{tcolorbox} % necesario para \newtcblisting, many soporte para cajas anidadas
+
+
+ 
+  % Hay colores predefinidos que se pueden usar directamente:
+  % black, white, red, green, blue, cyan, magenta, yellow,
+  % gray, brown, lime, olive, orange,
+  % pink, purple, teal, violet.
+ 
+ % ===============================
+ % 2.2 Definición de colores
+   % ===============
+   % 2.2.1 Para Colorbox
      % =======
      % 2.2.1.1 Observación/Nota
       \definecolor{ObservationYellow}{RGB}{204,153,0}
@@ -120,77 +121,46 @@
       \definecolor{WarningOrangeLight}{RGB}{255,235,204}  % fondo suave
       \definecolor{WarningOrangeDark}{RGB}{180,90,0}      % borde / título
       \definecolor{WarningAccent}{RGB}{140,70,0}          % detalles / overlay
+   % ===============
+   % 2.2.2 Para codigo bash
+
+    \definecolor{bashtext}{RGB}{212,212,212} % colorbox bash
 
    % ===============
-   % 2.2.2 Fondo del documento
-    \definecolor{Backdoc0}{RGB}{230, 230, 230}% Claro 
-    \definecolor{Backdoc1}{RGB}{36, 40, 48}   % Oscuro
-    % Fondo obscuro
-    \definecolor{Text0}  {RGB}{50, 50, 50}     % Claro 
-    \definecolor{Text1}   {RGB}{220, 220, 220} % Oscuro 
-
+   % 2.2.2 Para fondo del documento
+    \definecolor{oatpaper}    {RGB}{230, 230, 230} 
+    \definecolor{softlatte}   {RGB}{240, 228, 210}
+    \definecolor{softegg}     {RGB}{255, 252, 244}
    % ===============
+   % 2.2.2 Para Codigo Python
+    \definecolor{codegreen}   {rgb}{0.00, 0.60, 0.00}
+    \definecolor{codegray}    {rgb}{0.50, 0.50, 0.50}
+    \definecolor{codepurple}  {rgb}{0.58, 0.00, 0.82}
+    \definecolor{backcolor}   {rgb}{0.97, 0.97, 0.97}
+    \definecolor{codeblue}    {rgb}{0.20, 0.20, 0.60}
+   % =============== 
    % 2.2.3 Titulos
-     
      % =======
-     % =======
-     % 2.2.3.1 Part 
-     % Fondo obscuro
-     \definecolor{Partcolor}{RGB}{40, 60, 100} 
-     % Fondo claro
-     %\definecolor{Partcolor}{RGB}{70, 100, 160}
-     % Fondo versátil
-     %\definecolor{Partcolor}{RGB}{60, 80, 120} 
-     
+     % 2.2.3.1 Part (más oscuro)
+       \definecolor{PartPurple}{RGB}{50,0,90}
      % =======
      % 2.2.3.1 Chapter
-     % Fondo obscuro
-     \definecolor{Chaptercolor}{RGB}{70, 50, 100} 
-     % Fondo claro
-     %\definecolor{Chaptercolor}{RGB}{120, 90, 180}
-     % Fondo versátil
-     %\definecolor{Chaptercolor}{RGB}{90, 70, 120}  
-     
-     % =======
-     % 2.2.3.1 *Chapter
-     % Fondo obscuro
-     \definecolor{*chaptercolor}{RGB}{85, 85, 105} 
-     % Fondo claro
-     %\definecolor{*chaptercolor}{RGB}{140, 140, 180}
-     % Fondo (versátil)
-     %\definecolor{*chaptercolor}{RGB}{100, 100, 130} 
-     
-     
+       \definecolor{DarkPurple}{RGB}{80,30,130}
      % =======
      % 2.2.3.1 Section
-     % Fondo obscuro
-     \definecolor{Sectioncolor}{RGB}{60, 80, 60} 
-     % Fondo claro
-     %\definecolor{Sectioncolor}{RGB}{100, 130, 100}
-     % Fondo versátil
-     %\definecolor{Sectioncolor}{RGB}{70, 100, 70}
-     
+       \definecolor{SectionPlum}{RGB}{110,60,170}
      % =======
-     % 2.2.3.1 Subsection
-     % Fondo obscuro
-     \definecolor{Subsectioncolor}{RGB}{75, 75, 110} 
-     % Fondo claro
-     %\definecolor{Subsectioncolor}{RGB}{130, 130, 180}
-     % Fondo versátil
-     %\definecolor{Subsectioncolor}{RGB}{100, 100, 140}
-     
+     % 2.2.3.1 subsection
+       \definecolor{SubsectionIndigo}{RGB}{140,90,210}
      % =======
-     % 2.2.3.1 Subsubsection
-     % Fondo obscuro
-      \definecolor{Subsubsectioncolor}{RGB}{70, 70, 90} 
-     % Fondo claro
-     %\definecolor{Subsubsectioncolor}{RGB}{150, 150, 170}
-     % Fondo versátil
-     %\definecolor{Subsubsectioncolor}{RGB}{120, 120, 150} 
-
+     % 2.2.3.1 subsubsection (más claro)
+       \definecolor{SubsubsectionLavender}{RGB}{170,120,240}
+     % =======
+     % 2.2.3.1 *Chapter
+       \definecolor{AppendixTeal}{RGB}{128,128,128}
 
 % ============================================================
-% 4-Colorbox (las de codigo estan en la seccion de codigo)
+% 3-Colorbox 
   % ===============================
   % 3.1 Configuraciones
     \tcbset{
@@ -208,7 +178,7 @@
         boxsep=1pt                       % Espacio entre el borde y el título
     },
     fonttitle=\bfseries\sffamily,       % Fuente del título en negrita y sans-serif
-    %drop lifted shadow                  % Efecto de sombra levantada
+    drop lifted shadow                  % Efecto de sombra levantada
     }
   
   % ===============================
@@ -410,19 +380,12 @@
    %=======
 
 % ============================================================
-% 5-Documento
- \pagecolor{Backdoc1}       % Color de fondo  1 obscuro
- \color{Text1}              % Color del texto 2 claro
- \setlength{\intextsep}{4pt}        % Espacio vertical entre texto y figuras/tablas flotantes
- \setlength{\textfloatsep}{6pt}     % Espacio entre texto y floats en la parte superior/inferior
- \setlength{\floatsep}{4pt}         % Espacio entre dos floats consecutivos
- \allowdisplaybreaks[2]             % Permite saltos en ecuaciones, nivel moderado
- \setlength{\parskip}{5pt}          % Espacio entre párrafos
- \setlength{\parindent}{10pt}       % Sangría
- 
-
+% 4-Fondo de documento
+ \pagecolor{oatpaper}          % Cambia el color de fondo del PDF
+ \color{black}              % Color del texto (asegúrate que sea legible)
+        
 % ============================================================
-% 6-Toc/indice
+% 5-Tabla de Contenidos
   % ==============================
   % Modifica la entrada de capítulos en el indice
     \def\l@chapter#1#2{%
@@ -474,7 +437,9 @@
    \fi}
 
 % ============================================================
-% 7-Formato visual del títulos
+% 6-Formato visual del títulos
+  % ===============================
+  % Definicion
     % ===============
     % Parte
       \newcommand{\CustomPartFormat}[1]{%
@@ -484,8 +449,8 @@
           \node[
             rounded corners=2pt,
             minimum height=6ex,
-            draw=Partcolor,
-            fill=Partcolor,
+            draw=PartPurple,
+            fill=PartPurple,
             text=white,
             line width=1pt,
             anchor=center
@@ -494,49 +459,29 @@
       \end{center}
       \vspace{5ex}
       }
-      % ====================
-        \titleformat{\part}[display]
-        {\normalfont\Huge\bfseries}  % tamaño y estilo destacado
-        {}                            % sin número o etiqueta adicional
-        {0pt}                         % sin separación con el contenido
-        {\CustomPartFormat}          % formato personalizado
-      \titlespacing*{\part}{0pt}{10pt}{10pt}  % sangría, antes, después
-
+  
   
     % ===============
     % Capítulo
-      \newcommand{\CustomChapterFormat}[1]{%
+      \newcommand{\CustomChapterFormat}[1]{
       \vspace{2ex}
-      \begin{tikzpicture}[overlay, remember picture]
+      \begin{tikzpicture}[overlay, every node/.style={font=\LARGE\bfseries\sffamily}]
         \node[
-          anchor=north west,
+          right,
           rounded corners=2pt,
           minimum height=6ex,
-          draw=Chaptercolor,
-          fill=Chaptercolor,
+          draw=DarkPurple,
+          fill=DarkPurple,
           text=white,
-          line width=1pt,
-          font=\LARGE\bfseries\sffamily,
-          text width=0.9\paperwidth,
-          align=left
-        ] at ([yshift=-2cm]current page.north west) % Posición segura en página
-        {\chaptername~\thechapter\quad #1};
-    
-        \draw[very thick, color=Chaptercolor]
-          ([xshift=0.3mm, yshift=-0.3mm]current page.north west)
-          -- ([xshift=0.9\paperwidth]current page.north west);
+          line width=1pt
+        ](chapter) at (0,0) {\chaptername~\thechapter};
+        \node[right, text=DarkPurple] at (chapter.east) {#1};
+        \draw[very thick, color=DarkPurple]
+          ([xshift=0.3mm, yshift=-0.3mm]chapter.north west)
+          -- ([xshift=\linewidth]chapter.north west);
       \end{tikzpicture}
-      \vspace{7ex}
+      \vspace{5ex}
       }
-  
-        % ====================
-        
-        \titleformat{\chapter}[display]
-        {\normalfont\huge\bfseries}
-        {}                            
-        {0pt}                         
-        {\CustomChapterFormat}
-      \titlespacing*{\chapter}{0pt}{5pt}{8pt}
     % ===============
     % Capítulo*
       \newcommand{\CustomUnnumberedChapterFormat}[1]{
@@ -546,8 +491,8 @@
             right,
             rounded corners=2pt,
             minimum height=5ex,
-            draw=*chaptercolor,
-            fill=*chaptercolor,
+            draw=AppendixTeal,
+            fill=AppendixTeal,
             text=white,
             line width=1pt,
             text width=\linewidth-2em,
@@ -556,14 +501,7 @@
         \end{tikzpicture}
         \vspace{4ex}
       }
-      % ====================
-      
-      \titleformat{name=\chapter,numberless}[display]
-      {\normalfont\huge\bfseries}
-      {}                            
-      {0pt}                         
-      {\CustomUnnumberedChapterFormat}
-      \titlespacing*{\chapter}{0pt}{10pt}{10pt}
+
     % ===============
     % Sección
      \newcommand{\CustomSectionFormat}[1]{%
@@ -571,8 +509,8 @@
        \begin{tikzpicture}[overlay, every node/.style={font=\normalsize\bfseries\sffamily, text=white, align=left}]
          \node[
            rounded corners=2pt,
-           draw=Sectioncolor,
-           fill=Sectioncolor,
+           draw=SectionPlum,
+           fill=SectionPlum,
            line width=1pt,
            inner xsep=0.5em,
            inner ysep=0.4em,
@@ -581,14 +519,6 @@
        \end{tikzpicture}
        \vspace{1ex}
      }
-     % ====================
-     % Sección
-     \titleformat{\section}[block]
-     {\normalfont\Large\bfseries}
-     {}                            
-     {0pt}                         
-     {\CustomSectionFormat}
-     \titlespacing*{\section}{0pt}{10pt}{-25pt}
  
 
     % ===============
@@ -598,8 +528,8 @@
         \begin{tikzpicture}[every node/.style={font=\small\bfseries\sffamily, align=left}]
           \node[
             rounded corners=2pt,
-            draw=Subsectioncolor,
-            fill=Subsectioncolor,
+            draw=SubsectionIndigo,
+            fill=SubsectionIndigo,
             text=white,
             line width=1pt,
             inner xsep=0.6em,
@@ -608,14 +538,6 @@
         \end{tikzpicture}
         \vspace{1ex}
       }
-      % ====================
-      % Subsección
-      \titleformat{\subsection}[block]
-      {\normalfont\large\bfseries}
-      {}                            
-      {0pt}                         
-      {\CustomSubsectionFormat}
-      \titlespacing*{\subsection}{0pt}{10pt}{-25pt}
 
     % ===============
     % Subsubsección
@@ -626,8 +548,8 @@
            right,
            rounded corners=2pt,
            minimum height=2.5ex,
-           draw=Subsubsectioncolor,
-           fill=Subsubsectioncolor,
+           draw=SubsubsectionLavender,
+           fill=SubsubsectionLavender,
            text=white,
            line width=0.8pt,
            inner xsep=1ex,
@@ -636,25 +558,89 @@
        \end{tikzpicture}
        \vspace{2ex}
      }
-     % ====================
-     \titleformat{\subsubsection}[block]
-     {\normalfont\normalsize\bfseries}
-     {}                            
-     {0pt}                         
-     {\CustomSubsubsectionFormat}
-     \titlespacing*{\subsubsection}{0pt}{10pt}{-20pt}
 
   
     % ===============
+    % Parrafo
+    % ===============
+    % Subparrafo
+    % ===============
 
+  % ===============================
+  % Aplica el formato usando titlesec
+  \usepackage{titlesec} % Asegúrate de cargar esto
+
+  \usepackage{titlesec} % Asegúrate de cargar esto
+
+  % ====================
+% ====================
+% Parte (si usas \part)
+  \titleformat{\part}[display]
+    {\normalfont\Huge\bfseries}  % tamaño y estilo destacado
+    {}                            % sin número o etiqueta adicional
+    {0pt}                         % sin separación con el contenido
+    {\CustomPartFormat}          % formato personalizado
+  \titlespacing*{\part}{0pt}{10pt}{10pt}  % sangría, antes, después
+
+% ====================
+% Capítulo (numerado)
+  \titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}
+    {}                            
+    {0pt}                         
+    {\CustomChapterFormat}
+  \titlespacing*{\chapter}{0pt}{10pt}{10pt}
+
+% ====================
+% Capítulo* (no numerado)
+  \titleformat{name=\chapter,numberless}[display]
+    {\normalfont\huge\bfseries}
+    {}                            
+    {0pt}                         
+    {\CustomUnnumberedChapterFormat}
+  \titlespacing*{\chapter}{0pt}{10pt}{10pt}
+  
+% ====================
+% Sección
+  \titleformat{\section}[block]
+    {\normalfont\Large\bfseries}
+    {}                            
+    {0pt}                         
+    {\CustomSectionFormat}
+  \titlespacing*{\section}{0pt}{10pt}{-25pt}
+
+% ====================
+% Subsección
+  \titleformat{\subsection}[block]
+    {\normalfont\large\bfseries}
+    {}                            
+    {0pt}                         
+    {\CustomSubsectionFormat}
+  \titlespacing*{\subsection}{0pt}{10pt}{-25pt}
+
+% ====================
+% Subsubsección
+  \titleformat{\subsubsection}[block]
+    {\normalfont\normalsize\bfseries}
+    {}                            
+    {0pt}                         
+    {\CustomSubsubsectionFormat}
+  \titlespacing*{\subsubsection}{0pt}{10pt}{-20pt}
+
+% ===============
+% Parrafo
+% ===============
+% Subparrafo
+% ===============
 % ============================================================
-% 8-hipervinculos
+% 13-hipervinculos
+ \RequirePackage{hyperref}
   \hypersetup{ 
       linktoc=all, 
       bookmarksnumbered, 
       bookmarksopen, 
       hidelinks}
-
+  \RequirePackage{bookmark}
   \bookmarksetup{
       addtohook={ 
           \ifnum\bookmarkget{level}=0 
@@ -669,8 +655,8 @@
  
 
 % ============================================================
-% 9- Captions figuras y Tablas
-
+% 14- Captions de figuras y Tablas\RequirePackage{caption}
+  \RequirePackage{subcaption}
   \DeclareCaptionFont{custom}{\color{darkgray}\sffamily}
   \captionsetup{
       font=small,
@@ -687,31 +673,70 @@
       labelsep=colon
   }
 
+% ============================================================
+% 15-Configuración de pies de página y encabezados
+  \setlength{\intextsep}{4pt}        % espacio vertical entre texto y figuras/tablas flotantes
+  \setlength{\textfloatsep}{6pt}     % espacio entre texto y floats en la parte superior/inferior
+  \setlength{\floatsep}{4pt}         % espacio entre dos floats consecutivos
+  \allowdisplaybreaks[2]             % permite saltos en ecuaciones, nivel moderado
+
 
 % ============================================================
-% 10-Cambiar todas las matemáticas en línea a display math
+% 20-Nota Pie de pagina
+ \def\footnoterule{\kern -3pt\textcolor{blue}{\hrule width \linewidth height 0.4pt}\kern 2.6pt}
+ \def\thefootnote{\color{black}\bfseries\sffamily(\arabic{footnote})}
+
+% ============================================================
+% 21-Cambiar todas las matemáticas en línea a display math
  \everymath{\color{blue}\displaystyle}
 
 
 % ============================================================
-% 11-Cabecera/Pie de pagina
+% 24-Desactiva la numeracion
+ %\setcounter{secnumdepth}{0}
+
+% ============================================================
+% 25-Imagen de fondo
+  \pagestyle{fancy}
+  \fancyhf{}
+  %\fancyfoot[C]{
+  % \begin{tikzpicture}[remember picture,overlay]
+  %   \node[anchor=south east, yshift=-1.5mm, xshift=1.5mm] at (current page.south east) {\includegraphics[height=29mm]{images/banner.png}};
+  % \end{tikzpicture}
+  % \textcolor{gray}{\thepage}
+  %}
+  \usepackage{eso-pic}
+  \usepackage{graphicx}
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \fancyfoot[C]{\textcolor{gray}{\thepage}}
+  
+  %\AddToShipoutPictureBG*{
+  %  \put(\LenToUnit{\dimexpr\paperwidth-30mm},0){%
+  %    \includegraphics[height=29mm]{images/banner.png}%
+  %  }
+  %}
+% ============================================================
+% 26-Cabecera
+
+ \pagestyle{fancy}
+ \fancyhf{} % limpia encabezado y pie
+ 
+ % Encabezado
+ \fancyhead[LO]{\textcolor{DarkPurple}{\footnotesize\itshape\leftmark}} % odd pages (derecha)
+ \fancyhead[RE]{\textcolor{DarkPurple}{\footnotesize\itshape\leftmark}} % even pages (izquierda)
+% ============================================================
+% 26-Pie de pagina
+
   % ==============================
-  % Limpia encabezados y pies, activa estilo fancy
-    \pagestyle{fancy}
-    \fancyhf{}
-  % ==============================
-  % Encabezado
-   \fancyhead[LO]{\textcolor{Text1}{\footnotesize\itshape\leftmark}} % odd pages (derecha)
-   \fancyhead[RE]{\textcolor{Text1}{\footnotesize\itshape\leftmark}} % even pages (izquierda)
-  % ==============================
-  % 26-Pie de pagina
-    % Número de página centrado en recuadro con estilo personalizado
+  % Número de página centrado en recuadro
     \fancyfoot[C]{%
-      \tikz[baseline=-0.8ex]{%
+      \tikz[baseline=-0.8ex]{
         \node[
           sharp corners,
           inner sep=3pt,
-          fill=Chaptercolor,
+          fill=DarkPurple,
           text=white,
           font=\normalsize\bfseries\sffamily,
           text width=4ex,
@@ -719,129 +744,120 @@
         ]{\thepage};
       }
     }
-    
-    % Frase pie de página en páginas impares (izquierda y derecha)
-    \fancyfoot[LO]{\textcolor{Text1}{\footnotesize\itshape Frase izquierda}}
-    \fancyfoot[RE]{\textcolor{Text1}{\footnotesize\itshape Frase derecha}}
-    
-    % Actualiza \leftmark con capítulos para encabezados
-    \renewcommand{\chaptermark}[1]{\markboth{\thechapter\quad #1}{}}
-    
-    % Regla personalizada para notas al pie
-    \def\footnoterule{%
-      \kern -3pt
-      \textcolor{blue}{\hrule width \linewidth height 0.4pt}
-      \kern 2.6pt
+  % ==============================  
+  % Frase pie de página en página impar 
+    %(izquierda)
+    \fancyfoot[LO]{%
+      \textcolor{DarkPurple}{\footnotesize\itshape Frase izquierda}
     }
     
-    % Formato del número de nota al pie: negrita, sans serif, negro, entre paréntesis
-    \def\thefootnote{\color{black}\bfseries\sffamily(\arabic{footnote})}
+    % derecha
+    \fancyfoot[RE]{%
+      \textcolor{DarkPurple}{\footnotesize\itshape Frase derecha}
+    }
+    
+  % ==============================
+  % Para que los capítulos actualicen \leftmark correctamente
+    \renewcommand{\chaptermark}[1]{
+      \markboth{\thechapter\quad #1}{}
+    }
+  % ==============================
+% ============================================================
+% 27-Definición de estilo Texto global
+
+  \setlength{\parskip}{5pt}    % espacio entre párrafos
+  \setlength{\parindent}{10pt}   % sin sangría
+  
+% ============================================================
+% 27-Colores codigo
+  \definecolor{bashcmd}{RGB}{80, 150, 80}        % Comandos resaltados en listings (sudo, apt, etc.)
+  \definecolor{bashbg}{RGB}{48, 10, 36}            % Fondo del tcolorbox
+  \definecolor{bashbg1}{RGB}{25, 30, 45}           % Fondo del bloque de código listings
+  \definecolor{SolutionAccent}{RGB}{233,196,106}  % Color del texto flotante a la derecha del título del tcolorbox
+  \definecolor{bashtext}{RGB}{212,212,212}         % Color del texto base en listings
+  \definecolor{grisDark}{RGB}{50,50,50}            % Fondo del título del tcolorbox
+  \definecolor{grisLight}{RGB}{230,230,230}        % Color del texto del título del tcolorbox
+  
 
 % ============================================================
-% 12-Codigo
-  % Colores codigo
-    \definecolor{bashcmd}{RGB}{80, 150, 80}        % Comandos resaltados en listings (sudo, apt, etc.)
-    \definecolor{bashbg}{RGB}{48, 10, 36}            % Fondo del tcolorbox
-    \definecolor{bashbg1}{RGB}{25, 30, 45}           % Fondo del bloque de código listings
-    \definecolor{SolutionAccent}{RGB}{233,196,106}  % Color del texto flotante a la derecha del título del tcolorbox
-    \definecolor{bashtext}{RGB}{212,212,212}         % Color del texto base en listings
-    \definecolor{grisDark}{RGB}{50,50,50}            % Fondo del título del tcolorbox
-    \definecolor{grisLight}{RGB}{230,230,230}        % Color del texto del título del tcolorbox
-    
-  
-  % ============================================================
-  % Estilos de código
-      % ==============================  
-      % bash
-        \lstdefinestyle{bashstyle}{
-        literate={\$}{{{\color{bashcmd}\$}}}1,     % Resalta el símbolo "$" del prompt en color bashcmd
-        backgroundcolor=\color{bashbg1},           % Establece el color de fondo del bloque de código
-        basicstyle=\ttfamily\small\color{bashtext},% fuente monoespaciada, tamaño pequeño y color del texto base
-        keywordstyle=\color{bashcmd}\bfseries,     % Estilo para palabras clave
-        language=bash,                             % Lenguaje para el resaltado sintáctico (bash)
-        breaklines=true,                           % Líneas largas se dividan automáticamente
-        showstringspaces=false,                    % Evita mostrar espacios como caracteres visibles en cadenas
-        morekeywords={sudo,apt,cd,ls,mkdir},       % Añade palabras clave
-        }
-      % ==============================
-      % bash2
-        \lstdefinestyle{bashstyle2}{
-        literate={\$}{{{\color{bashcmd}\$}}}1,     % Resalta el símbolo "$" del prompt en color bashcmd
-        backgroundcolor=\color{bashbg},           % Establece el color de fondo del bloque de código
-        basicstyle=\ttfamily\small\color{bashtext},% fuente monoespaciada, tamaño pequeño y color del texto base
-        keywordstyle=\color{bashcmd}\bfseries,     % Estilo para palabras clave
-        language=bash,                             % Lenguaje para el resaltado sintáctico (bash)
-        breaklines=true,                           % Líneas largas se dividan automáticamente
-        showstringspaces=false,                    % Evita mostrar espacios como caracteres visibles en cadenas
-        morekeywords={sudo,apt,cd,ls,mkdir},       % Añade palabras clave
-        }
-      % ==============================
-      % Latex
-        \lstdefinestyle{latexstyle}{
-        backgroundcolor=\color{bashbg1},               % Usa el mismo fondo que bashstyle2
-        basicstyle=\ttfamily\small\color{bashtext},   % Fuente, tamaño y color base
-        keywordstyle=\color{bashcmd}\bfseries,        % Color de comandos LaTeX
-        language=[LaTeX]TeX,                           % Lenguaje LaTeX
-        breaklines=true,                              % Romper líneas largas
-        showstringspaces=false,                       % No mostrar espacios en cadenas
-        morekeywords={documentclass,usepackage,begin,end,textbf,textit,section,subsection,maketitle}, % Comandos LaTeX adicionales
-        }
-      % ==============================
-  
-      
-  
-  % ============================================================
-  % Cajas de codigo
-    % ==============================
-    % Debian
-      \newtcolorbox{Debianbox}[1][]{
-      title={ bash}, % título alineado a la izquierda
-      colback=bashbg1,                     % color fondo caja
-      colframe=grisDark,                % color borde caja
-      coltitle=grisLight,       % color título
-      boxed title style={                 % estilo del título
-      colback=grisDark,       % fondo título
-      boxrule=0pt,                      % borde en título
-      left= 0pt, right=529pt,            % margen horizontal en título
-      height=1.2em,                     % altura fija título
-      valign=center                     % texto centrado verticalmente
-      },
-      arc=4pt,                           % esquinas redondeadas
-      fonttitle=\bfseries,               % título en negrita(grosor)
-      overlay unbroken and first={       % nodo extra en esquina título
-      \node[below right,font=\small,color=SolutionAccent,text width=.8\linewidth]
-      at (title.north east) {#1};
-      },
-      enhanced,                         % mejoras gráficas
-      boxsep=2pt,                       % separación interna caja
-      left=-2pt, right=-2pt, top=-6pt, bottom=-5.5pt, % márgenes internos
-      before upper={\setlength{\parskip}{2pt}}, % espacio entre párrafos
-      before skip=4pt, after skip=4pt  % espacio antes y después caja
+% Estilos de código
+    % ==============================  
+    % bash
+      \lstdefinestyle{bashstyle}{
+      literate={\$}{{{\color{bashcmd}\$}}}1,     % Resalta el símbolo "$" del prompt en color bashcmd
+      backgroundcolor=\color{bashbg1},           % Establece el color de fondo del bloque de código
+      basicstyle=\ttfamily\small\color{bashtext},% fuente monoespaciada, tamaño pequeño y color del texto base
+      keywordstyle=\color{bashcmd}\bfseries,     % Estilo para palabras clave
+      language=bash,                             % Lenguaje para el resaltado sintáctico (bash)
+      breaklines=true,                           % Líneas largas se dividan automáticamente
+      showstringspaces=false,                    % Evita mostrar espacios como caracteres visibles en cadenas
+      morekeywords={sudo,apt,cd,ls,mkdir},       % Añade palabras clave
       }
     % ==============================
-    % Ubuntu
-      \newtcolorbox{Ubuntubox}[1][]{
-      title={bash},
-      colback=bashbg,
-      colframe=grisDark,
-      coltitle=grisLight,
-      boxed title style={
-      colback=grisDark,
-      boxrule=0pt,
-      left=0pt, right=529pt,
-      height=1.2em,
-      valign=center
-      },
-      arc=4pt,
-      fonttitle=\bfseries,
-      overlay unbroken and first={
-      \node[below right,font=\small,color=SolutionAccent,text width=.8\linewidth]
-      at (title.north east) {#1};
-      },
-      enhanced,
-      boxsep=2pt,
-      left=-2pt, right=-2pt, top=-6pt, bottom=-5.5pt,
-      before upper={\setlength{\parskip}{2pt}},
-      before skip=4pt, after skip=4pt
+    % bash2
+      \lstdefinestyle{bashstyle2}{
+      literate={\$}{{{\color{bashcmd}\$}}}1,     % Resalta el símbolo "$" del prompt en color bashcmd
+      backgroundcolor=\color{bashbg},           % Establece el color de fondo del bloque de código
+      basicstyle=\ttfamily\small\color{bashtext},% fuente monoespaciada, tamaño pequeño y color del texto base
+      keywordstyle=\color{bashcmd}\bfseries,     % Estilo para palabras clave
+      language=bash,                             % Lenguaje para el resaltado sintáctico (bash)
+      breaklines=true,                           % Líneas largas se dividan automáticamente
+      showstringspaces=false,                    % Evita mostrar espacios como caracteres visibles en cadenas
+      morekeywords={sudo,apt,cd,ls,mkdir},       % Añade palabras clave
       }
+    % ==============================
 % ============================================================
+% Cajas de codigo
+  % ==============================
+  % Debian
+    \newtcolorbox{Debianbox}[1][]{
+    title={ bash}, % título alineado a la izquierda
+    colback=bashbg1,                     % color fondo caja
+    colframe=grisDark,                % color borde caja
+    coltitle=grisLight,       % color título
+    boxed title style={                 % estilo del título
+    colback=grisDark,       % fondo título
+    boxrule=0pt,                      % borde en título
+    left= 0pt, right=529pt,            % margen horizontal en título
+    height=1.2em,                     % altura fija título
+    valign=center                     % texto centrado verticalmente
+    },
+    arc=4pt,                           % esquinas redondeadas
+    fonttitle=\bfseries,               % título en negrita(grosor)
+    overlay unbroken and first={       % nodo extra en esquina título
+    \node[below right,font=\small,color=SolutionAccent,text width=.8\linewidth]
+    at (title.north east) {#1};
+    },
+    enhanced,                         % mejoras gráficas
+    boxsep=2pt,                       % separación interna caja
+    left=-2pt, right=-2pt, top=-6pt, bottom=-5.5pt, % márgenes internos
+    before upper={\setlength{\parskip}{2pt}}, % espacio entre párrafos
+    before skip=4pt, after skip=4pt  % espacio antes y después caja
+    }
+  % ==============================
+  % Ubuntu
+    \newtcolorbox{Ubuntubox}[1][]{
+    title={bash},
+    colback=bashbg,
+    colframe=grisDark,
+    coltitle=grisLight,
+    boxed title style={
+    colback=grisDark,
+    boxrule=0pt,
+    left=0pt, right=529pt,
+    height=1.2em,
+    valign=center
+    },
+    arc=4pt,
+    fonttitle=\bfseries,
+    overlay unbroken and first={
+    \node[below right,font=\small,color=SolutionAccent,text width=.8\linewidth]
+    at (title.north east) {#1};
+    },
+    enhanced,
+    boxsep=2pt,
+    left=-2pt, right=-2pt, top=-6pt, bottom=-5.5pt,
+    before upper={\setlength{\parskip}{2pt}},
+    before skip=4pt, after skip=4pt
+    }
+  

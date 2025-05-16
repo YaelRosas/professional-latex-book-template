@@ -12,10 +12,10 @@
 % --------------------------------------------------
 % 1-Carga de clase base
  \LoadClass[12pt]{book}   
-
-
+ 
 % --------------------------------------------------
 % 2-Carga de paquetes necesarios
+ 
  \RequirePackage{graphicx}  % Para la inclusión y manipulación de archivos de gráficos (imágenes) en el documento. Permite usar formatos como JPG, PNG, PDF, etc.
  \RequirePackage{amsthm}    % Para ampliar las capacidades matemáticas de LaTeX:
  \RequirePackage{amsmath}   % Proporciona entornos y comandos avanzados para ecuaciones y otros elementos matemáticos.
@@ -31,7 +31,13 @@
  \RequirePackage{colortbl} % Permite añadir color a filas, columnas o celdas individuales dentro de tablas (en entornos tabular y array).
  \RequirePackage{longtable}% Permite crear tablas que se extienden a lo largo de varias páginas, manteniendo los encabezados y pies de página definidos. Útil para tablas de datos extensas.
  \RequirePackage{booktabs} % Proporciona reglas horizontales de alta calidad para tablas (comandos como \toprule, \midrule, \bottomrule) que mejoran la estética y legibilidad de las tablas académicas y profesionales.
-
+ \RequirePackage[utf8]{inputenc}
+ \RequirePackage{titlesec}  % Titlesec tiene que cargarse antes que tocloft
+ \RequirePackage{tocloft}
+ \RequirePackage{framed}    % Formato
+ \RequirePackage{mdframed}
+ \RequirePackage{mathpazo}  % Paquete de fuentes (Este me gusto por que se aplica a formulas y tiene buena legibilidad) si lo modificas tambien tienes que modificar la definicion de gls (tex/03-Referencia_Configuracion/02-definicion_glosarios.tex)
+ 
 % --------------------------------------------------
 % 3-Opciones globales de documento
  
@@ -44,11 +50,20 @@
 % --------------------------------------------------
 % 4-Indice
 
- \setcounter{tocdepth}{2} % Establece la profundidad hasta la que se mostrarán las secciones en la Tabla de Contenidos (Índice).
- % {2} significa que se incluirán \part, \chapter y \section en el índice.
+ \setcounter{tocdepth}{2} % Establece la profundidad
 
+  % Cambiar el título de la tabla de contenidos
+  \renewcommand{\contentsname}{Índice} 
+  % Agregar líneas de puntos en el índice
+  \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+  
+  % Ajustar espacios alrededor de la tabla de contenidos
+   \setlength{\cftbeforetoctitleskip}{0pt}   % Espacio antes del título "Índice"
+   \setlength{\cftaftertoctitleskip}{10pt}   % Espacio después del título "Índice"
+   \setlength{\cftbeforesecskip}{5pt}    % Espacio antes de las secciones en el TOC
+ 
 % --------------------------------------------------
-% 5-Configuración de márgenes o página
+% 5-Configuración de márgenes 
  \RequirePackage[left=1cm,right=1cm,top=1.5cm,bottom=1.5cm]{geometry}
 
 % --------------------------------------------------
@@ -57,6 +72,7 @@
 
 % --------------------------------------------------
 % 7-Encabezados / pies de página
+
  \pagestyle{fancy}  % Activar fancyhdr
  \fancyhf{}  % Limpiar encabezados y pies
  \fancyhead[L]{Encabezado izquierdo}  % Personalizar encabezado
@@ -75,83 +91,12 @@
 
 
 % --------------------------------------------------
-% 8-Estilo texto, Numeracion, Indice y Títulos (\section, \subsection, \paragraph, etc)
-
- \setcounter{secnumdepth}{3}
- 
- \RequirePackage{titlesec}  % Titlesec tiene que cargarse antes que tocloft
- \RequirePackage{tocloft}
- \RequirePackage{framed}    % Formato
- \RequirePackage{mdframed}
- \RequirePackage{mathpazo}  % Paquete de fuentes (Este me gusto por que se aplica a formulas y tiene buena legibilidad) si lo modificas tambien tienes que modificar la definicion de gls (tex/03-Referencia_Configuracion/02-definicion_glosarios.tex)
-
-
- %%% Modificar el estilo de cada nivel
-
-  % % PART
-  %  \titleformat{\part}
-  %  [display]
-  %  {\normalfont\Huge\fontseries{sb}\selectfont\color{black}}
-  %  {\partname~\thepart}
-  %  {20pt}
-  %  {}
-  %
-  % % SECTION 
-  %  \titleformat{\section}
-  %  [block]
-  %  {\normalfont\LARGE\fontseries{sb}\selectfont\color{black}}
-  %  {\textcolor{blue}{\vrule width 4pt}\hspace{0.5em}\thesection}
-  %  {1em}
-  %  {}
-  %
-  % % SUBSECTION 
-  %  \titleformat{\subsection}
-  %  [block]
-  %  {\normalfont\Large\fontseries{sb}\selectfont\color{black}}
-  %  {\thesubsection}
-  %  {1em}
-  %  {}
-  %
-  % % SUBSUBSECTION 
-  %  \titleformat{\subsubsection}
-  %  [block]
-  %  {\normalfont\normalsize\fontseries{sb}\selectfont\color{black}}
-  %  {\thesubsubsection}
-  %  {1em}
-  %  {}
-  %
-  % % PARAGRAPH 
-  %  \titleformat{\paragraph}[block]
-  %  {\normalfont\normalsize\itshape\fontseries{sb}\selectfont\color{black}}
-  %  {}
-  %  {0pt}
-  %  {}
-  %  
-  % % SUBPARAGRAPH
-  %  \titleformat{\subparagraph}[block]
-  %  {\normalfont\small\itshape\fontseries{sb}\selectfont\color{gray!80!black}}
-  %  {}
-  %  {0pt}
-  %  {}
-  %                
- % Modificar el formato de las secciones en el índice
-  \titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
-  \titleformat{\subsection}[runin]{\normalfont\large\itshape}{\thesubsection}{1em}{}
- 
- % Ajustar espacios alrededor de la tabla de contenidos
-  \setlength{\cftbeforetoctitleskip}{0pt}   % Espacio antes del título "Índice"
-  \setlength{\cftaftertoctitleskip}{10pt}   % Espacio después del título "Índice"
-  \setlength{\cftbeforesecskip}{5pt}    % Espacio antes de las secciones en el TOC
- 
- % Agregar líneas de puntos en el índice
- \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
- % Cambiar el título de la tabla de contenidos
- \renewcommand{\contentsname}{Índice}
-
+% 8- Titulos
 
 
 
  %%% Cambiar el espaciado {izquierda}{espacio antes}{espacio después}
+ \setcounter{secnumdepth}{3}% se numeren las secciones hasta
 
  \titlespacing*{\section}{0pt}{10pt plus 2pt minus 1pt}{5pt}
  \titlespacing*{\subsection}{0pt}{8pt plus 1pt minus 1pt}{4pt}
@@ -161,35 +106,35 @@
 % --------------------------------------------------
 % 9-Definición de  entornos / comandos 
   %%% comandos definidos por el usuario
-  \newcommand{\autor}[1]{\textsc{#1}}
+  %\newcommand{\autor}[1]{\textsc{#1}}
   
   %%% Entornos definidos por el usuario
-  \newenvironment{resumen}{\begin{quote} \itshape}{\end{quote}}  
-  
-  \newenvironment{custompar}{
-    \begin{quote}
-    \setlength{\parindent}{0pt}%
-    \renewcommand{\baselinestretch}{1.2}\normalsize%
-    \sffamily\bfseries\color{black}
-  }{
-    \end{quote}
-  }
+  %\newenvironment{resumen}{\begin{quote} \itshape}{\end{quote}}  
+  %
+  %\newenvironment{custompar}{
+  %  \begin{quote}
+  %  \setlength{\parindent}{0pt}%
+  %  \renewcommand{\baselinestretch}{1.2}\normalsize%
+  %  \sffamily\bfseries\color{black}
+  %}{
+  %  \end{quote}
+  %}
 
 
 % --------------------------------------------------
-% 10-Cambios en los títulos, autor, fecha (si se quiere estilo personalizado)
- \renewcommand{\maketitle}{
+% 10- Contraportada
+ \renewcommand{\maketitle}{ % En lugar de mostrar título, autor, etc., muestra la fecha  actual.
    \begin{center}
      \today
    \end{center}
  }
 
 % --------------------------------------------------
-% 11-Imagenes de Fondo
+% 11- Imagenes de Fondo
  \RequirePackage{wallpaper}
 
 % --------------------------------------------------
-% 12-Epígrafe
+% 12- Epígrafe
  \RequirePackage{epigraph}
 
 % --------------------------------------------------
@@ -230,7 +175,6 @@
  
  \definecolor{linkblue}{rgb}{0.0, 0.6, 0.3}
  \definecolor{urlgreen}{rgb}{0.0, 0.6, 0.3}   
- 
  \definecolor{citeorange}{rgb}{1.0, 0.38, 0.28}
  \definecolor{filepurple}{rgb}{0.54, 0.17, 0.89}
  \definecolor{menu}{rgb}{1.0, 0.84, 0.0}
