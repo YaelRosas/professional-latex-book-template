@@ -2,55 +2,108 @@
 % pero algunas opciones impactan varias secciones
 % Modificar el orden de alguna seccion o paquetes puede causar errores
 
-% El .sty debe contener configuraciones opcionales, estilos visuales o mejoras funcionales
-% Su propósito es complementar al .cls sin modificar la estructura base del documento
-% Permite modularizar aspectos como fuentes, estilos de título, colores o entornos personalizados
-% Ideal para adaptar el diseño visual o funcional a distintos documentos sin tocar la clase principal
-\usepackage[utf8]{inputenc} % (solo necesario si usas pdfLaTeX)
-
-
+\NeedsTeXFormat{LaTeX2e} % verificacion de compatibilidad
 % ============================================================
-% 1-Paquetes
-  % Define los paquetes y configuraciones de estilo.
-  \ProvidesPackage{custom-style}[2025/05/06 Estilo personalizado]
-  \RequirePackage{pifont}
-  \RequirePackage{eso-pic}
-  \RequirePackage{graphicx}
-  \RequirePackage{fancyhdr}
-  \RequirePackage{hyperref}
-  \RequirePackage{subcaption}
-  \RequirePackage{yfonts}
-  \RequirePackage{xcolor}
-  \RequirePackage{listings}
-  \RequirePackage{pagecolor}
-  \RequirePackage[most,many]{tcolorbox} % necesario para \newtcblisting, many soporte para cajas anidadas 
-  \RequirePackage{bookmark}
-  \RequirePackage{titlesec}
-  \RequirePackage{tikz}
-  \usetikzlibrary{calc}
-  \usetikzlibrary{angles}
-  \usetikzlibrary{quotes}
-  \usetikzlibrary{arrows.meta}
-  \usepackage{titlesec} 
-  \tikzset{ 
-  	every picture/.style={ 
-  		line width=1pt, 
-  		fill=orange, 
-  		draw=violet, 
-  		text=blue, 
-  	}, 
-  	>={Stealth[length=6pt,inset=2pt]} 
-  }
+% 0-Paquetes
+  % Codificación y lenguaje
+    \RequirePackage[utf8]{inputenc}
+    \RequirePackage[T1]{fontenc}
+    \RequirePackage[spanish]{babel}
+    \RequirePackage{csquotes}
   
+  % Tipografía y fuentes
+    \RequirePackage{arev}
+    \RequirePackage[sfdefault]{roboto}
+    \RequirePackage{mathpazo}
+    \RequirePackage{yfonts}
+  
+  % Matemáticas
+    \RequirePackage{amsmath}
+    \RequirePackage{amssymb}
+    \RequirePackage{amsfonts}
+    \RequirePackage{amsthm}
+    \RequirePackage{mathtools}
+  
+  % Tablas
+    \RequirePackage{array}
+    \RequirePackage{booktabs}
+    \RequirePackage{colortbl}
+    \RequirePackage{longtable}
+  
+  % Figuras y gráficos
+    \RequirePackage{graphicx}
+    \RequirePackage{subcaption}
+    \RequirePackage{float}
+    \RequirePackage{tikz}
+    \usetikzlibrary{calc, angles, quotes, arrows.meta}
+    \tikzset{ 
+      every picture/.style={
+        line width=1pt,
+        fill=orange,
+        draw=violet,
+        text=blue,
+      },
+      >={Stealth[length=6pt,inset=2pt]}
+    }
+  
+  % Estilo de documento y encabezados
+    \RequirePackage{fancyhdr}
+    \RequirePackage{titlesec}
+    \RequirePackage{tocloft}
+    \RequirePackage{caption}
+  
+  % Marcos y cajas
+    \RequirePackage{framed}
+    \RequirePackage{mdframed}
+    \RequirePackage[most,many]{tcolorbox}
+  
+  % Código y color
+    \RequirePackage{listings}
+    \RequirePackage{xcolor}
+    \RequirePackage{pagecolor}
+  
+  % Margenes y disposición
+    \RequirePackage[left=1cm,right=1cm,top=1.5cm,bottom=1.5cm]{geometry}
+    \RequirePackage{chngcntr}
+    \RequirePackage[bottom, hang]{footmisc}
+  
+  % Glosarios
+    \RequirePackage[
+      acronym,
+      symbols,
+      nonumberlist,
+      nogroupskip,
+      nomain,
+      toc,
+      section=chapter,
+      style=long,
+    ]{glossaries}
+  
+  % Bibliografía
+    \RequirePackage[
+      style=apa,
+      backend=biber,
+      citestyle=authortitle,
+      sorting=nyt,
+      doi=true,
+      isbn=true,
+      url=true
+    ]{biblatex}
+  
+  % Otros
+    \RequirePackage{eso-pic}       % Insertar contenido(como imágenes o texto)la página.
+    \RequirePackage{bookmark}      % Mejora hyperref, permite una estructura limpia y personalizable del índice del PDF.
+    \RequirePackage{wallpaper}     % Insertar imágenes como fondo de página
+    \RequirePackage{epigraph}      % Epigrafe
+    \RequirePackage[absolute,overlay]{textpos} % Posicionar texto u objetos en coordenadas absolutas
+    \RequirePackage{appendix}      % Apéndices
+    \RequirePackage{pifont}        % Símbolos especiales para listas o resaltado visual.
+    \RequirePackage{hyperref}      % Hipervínculos
+
+
 
 % ============================================================
-% 2-Lenguaje
- \RequirePackage[T1]{fontenc} % Para acentos
- \RequirePackage[spanish]{babel}
- \RequirePackage{csquotes} % Comillas (Tambien se usa para las citas)
-
-% ============================================================
-% 3-Colores
+% 1-Colores (Colores de codigo estan abajo)
    % Hay colores predefinidos que se pueden usar directamente:
    % black, white, red, green, blue, cyan, magenta, yellow,
    % gray, brown, lime, olive, orange,
@@ -120,14 +173,23 @@
       \definecolor{WarningOrangeLight}{RGB}{255,235,204}  % fondo suave
       \definecolor{WarningOrangeDark}{RGB}{180,90,0}      % borde / título
       \definecolor{WarningAccent}{RGB}{140,70,0}          % detalles / overlay
+     % =======
+     % 2.2.1.11 textbox
+      %\definecolor{colback1}  {RGB}{50, 56, 68}
+      %\definecolor{colframe1} {RGB}{120, 138, 182}
+      
+
+  
 
    % ===============
-   % 2.2.2 Fondo del documento
-    \definecolor{Backdoc0}{RGB}{230, 230, 230}% Claro 
-    \definecolor{Backdoc1}{RGB}{36, 40, 48}   % Oscuro
+   % 2.2.2 Fondo/Texto
+    %\definecolor{Backdoc}{RGB}{230, 230, 230}% Claro 
+    \definecolor{Backdoc}{RGB}{36, 40, 48}   % Oscuro
     % Fondo obscuro
-    \definecolor{Text0}  {RGB}{50, 50, 50}     % Claro 
-    \definecolor{Text1}   {RGB}{220, 220, 220} % Oscuro 
+    %\definecolor{Text}  {RGB}{50, 50, 50}     % Claro 
+    \definecolor{Text}   {RGB}{220, 220, 220} % Oscuro 
+    
+
 
    % ===============
    % 2.2.3 Titulos
@@ -187,10 +249,18 @@
      %\definecolor{Subsubsectioncolor}{RGB}{150, 150, 170}
      % Fondo versátil
      %\definecolor{Subsubsectioncolor}{RGB}{120, 120, 150} 
-
+   % ===============
+   % 2.2.4 Matematicas
+      \definecolor{softblue}{RGB}{70,130,180} % Steel Blue suave
+   % ===============
+   % 2.2.4 Link
+    \definecolor{linkcolor1}{RGB}{180, 240, 255} % Azul aún más claro
+    \definecolor{urlcolor1}{RGB}{144, 238, 144}    % verde claro (LightGreen)
+    \definecolor{citecolor1}{RGB}{135, 206, 250}   % rosado claro (LightPink)
+   
 
 % ============================================================
-% 4-Colorbox (las de codigo estan en la seccion de codigo)
+% 2-Colorbox (las de codigo estan en la seccion de codigo)
   % ===============================
   % 3.1 Configuraciones
     \tcbset{
@@ -408,73 +478,129 @@
      }
     }
    %=======
+   % 3.2.8 Textbox
+     \newtcolorbox{textbox}[1][]{
+      arc=4pt,
+      colframe=colframe1,
+      colback=colback1,
+      coltext=Text,
+      enhanced,
+      overlay unbroken and first={
+          \node[below right,font=\small,color=GeneralityAccent,text width=.8\linewidth]
+          at (frame.north east) {#1};
+      }
+     }
+
+
+
 
 % ============================================================
-% 5-Documento
- \pagecolor{Backdoc1}       % Color de fondo  1 obscuro
- \color{Text1}              % Color del texto 2 claro
- \setlength{\intextsep}{4pt}        % Espacio vertical entre texto y figuras/tablas flotantes
- \setlength{\textfloatsep}{6pt}     % Espacio entre texto y floats en la parte superior/inferior
- \setlength{\floatsep}{4pt}         % Espacio entre dos floats consecutivos
- \allowdisplaybreaks[2]             % Permite saltos en ecuaciones, nivel moderado
- \setlength{\parskip}{5pt}          % Espacio entre párrafos
- \setlength{\parindent}{10pt}       % Sangría
- 
-
-% ============================================================
-% 6-Toc/indice
-  % ==============================
-  % Modifica la entrada de capítulos en el indice
-    \def\l@chapter#1#2{%
-    \ifnum \c@tocdepth >\m@ne              % Si el nivel de indice permite mostrar capítulos
-        \addpenalty{-\@highpenalty}%       % Añade una penalización negativa para evitar saltos de página aquí
-        \vskip 1.0em \@plus\p@             % Espacio vertical antes del capítulo
-        \setlength\@tempdima{1.5em}%       % Define sangría temporal
-        \begingroup
-            \parindent \z@                % Sin sangría
-            \rightskip \@pnumwidth        % Margen derecho reservado para número de página
-            \parfillskip -\@pnumwidth     % Ajuste para alineación derecha
-            \leavevmode \bfseries         % Texto en negrita
-            \advance\leftskip\@tempdima   % Aplica la sangría izquierda
-            \hskip -\leftskip             % Corrige la posición por la sangría
-            % Muestra "Capítulo <nombre>" en color, sans serif, negrita
-            \textcolor{black}{\bfseries\sffamily \chaptername~#1}\nobreak\hfil
-            % Número de página en azul, alineado a la derecha
-            \nobreak\hb@xt@\@pnumwidth{\hss\color{black}#2}\par
-            \penalty\@highpenalty         % Alta penalización para evitar cortes de página
-        \endgroup
-    \fi}
-    
-  % ==============================
-  % Ajustes generales del indice
-   \def\@pnumwidth{6ex}     % Ancho reservado para los números de página
-   \def\@dotsep{.25}        % Separación entre puntos en las líneas punteadas
-   
-   % Define el formato general de líneas punteadas del indice
-   \def\@dottedtocline#1#2#3#4#5{ 
-   \ifnum #1>\c@tocdepth \else            % Solo muestra si el nivel está permitido
-   \vskip \z@ \@plus.2\p@                 % Espacio opcional antes
+% 3-Documento
+  % Apariencia general del documento
+    \pagecolor{Backdoc}               % Color de fondo del documento
+    \color{Text}                      % Color del texto
   
-   {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
-       \parindent #2\relax\@afterindenttrue
-       \interlinepenalty\@M               % Evita cortes de línea
-       \leavevmode
-       \@tempdima #3\relax
-       \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-       % Texto del título, sans serif, negrita
-       \color{black}\bfseries\sffamily #4\nobreak
-       % Líneas punteadas hasta el número de página
-       \leaders\hbox{$\m@th
-           \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
-           mu$}\hfill
-       \nobreak
-       % Número de página en negro
-       \hb@xt@\@pnumwidth{\hfil\normalfont\color{black}#5} 
-       \par} 
-   \fi}
+  % Espaciado y formato de párrafos
+    \setlength{\parskip}{5pt}         % Espacio vertical entre párrafos
+    \setlength{\parindent}{10pt}      % Sangría al inicio de párrafos
+  
+  % Espaciado en elementos flotantes (figuras, tablas)
+    \setlength{\intextsep}{4pt}       % Espacio entre texto y floats insertados en el texto
+    \setlength{\textfloatsep}{6pt}    % Espacio entre texto y floats en parte superior/inferior
+    \setlength{\floatsep}{4pt}        % Espacio entre dos floats consecutivos
+  
+  % Opciones del paquete/clase
+    \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}} % Pasa opciones no reconocidas a la clase base 'book'
+    \ProcessOptions\relax            % Procesa las opciones pasadas al paquete
+   
+
+  
+% ============================================================
+% 4-Toc/indice
+  % ==============================
+  % Personalización del índice (Tabla de Contenidos)
+
+    % ===============
+    % Color para el texto de capítulos en el índice
+      \newcommand{\tocchaptercolor}{Text}
+    % ===============
+    % Redefine el formato de las entradas de capítulo en el índice
+      \def\l@chapter#1#2{
+        \ifnum \c@tocdepth >\m@ne
+          \addpenalty{-\@highpenalty}
+          \addvspace{1.0em}
+          \setlength\@tempdima{1.5em}
+          \begingroup
+            \parindent \z@
+            \rightskip \@pnumwidth
+            \parfillskip -\@pnumwidth
+            \leavevmode
+            \bfseries\sffamily
+            \advance\leftskip\@tempdima
+            \hskip -\leftskip
+            \textcolor{\tocchaptercolor}{\chaptername~#1}\nobreak\hfil
+            \nobreak\hb@xt@\@pnumwidth{\hss\color{\tocchaptercolor}#2}\par
+            \penalty\@highpenalty
+          \endgroup
+        \fi
+      }
+    
+  % =============================================================
+  % Ajustes generales del índice
+    % ===============
+    % Ancho reservado para los números de página
+      \def\@pnumwidth{6ex}
+    % ===============
+    % Separación entre puntos de líneas punteadas
+      \def\@dotsep{.3}
+    % ===============
+    % Formato general de líneas punteadas para entradas del índice
+      \def\@dottedtocline#1#2#3#4#5{
+        \ifnum #1>\c@tocdepth \else
+          \vskip \z@ \@plus.2\p@
+          {
+            \leftskip #2\relax
+            \rightskip \@tocrmarg
+            \parfillskip -\rightskip
+            \parindent #2\relax
+            \@afterindenttrue
+            \interlinepenalty\@M
+            \leavevmode
+            \@tempdima #3\relax
+            \advance\leftskip \@tempdima
+            \null\nobreak\hskip -\leftskip
+            \color{Text}\bfseries\sffamily #4\nobreak
+            \leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill
+            \nobreak
+            \hb@xt@\@pnumwidth{\hfil\normalfont\color{Text}#5}
+            \par
+          }
+        \fi
+      }
+    
+  
+    % ===============
+    % Nivel de numeración de secciones (hasta subsubsection)
+      \setcounter{secnumdepth}{3}
+    % ===============
+    % Profundidad del índice (capítulos y secciones)
+      \setcounter{tocdepth}{2}
+    % ===============
+    % Título del índice
+      \renewcommand{\contentsname}{Índice}
+    % ===============
+    % Líneas punteadas en entradas del índice
+      \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+    % ===============
+    % Espacios alrededor del título del índice
+      \setlength{\cftbeforetoctitleskip}{0pt}
+      \setlength{\cftaftertoctitleskip}{10pt}
+    % ===============
+    % Espacio antes de entradas de secciones
+      \setlength{\cftbeforesecskip}{5pt}
 
 % ============================================================
-% 7-Formato visual del títulos
+% 5-Formato visual del títulos(colores definidos arriba)
     % ===============
     % Parte
       \newcommand{\CustomPartFormat}[1]{%
@@ -506,27 +632,29 @@
     % ===============
     % Capítulo
       \newcommand{\CustomChapterFormat}[1]{%
-      \vspace{2ex}
-      \begin{tikzpicture}[overlay, remember picture]
+      \vspace{2ex} % Espacio vertical antes del título del capítulo
+      \begin{tikzpicture}[overlay, remember picture] % Dibujo sobre la página actual
         \node[
-          anchor=north west,
-          rounded corners=2pt,
-          minimum height=6ex,
-          draw=Chaptercolor,
-          fill=Chaptercolor,
-          text=white,
-          line width=1pt,
-          font=\LARGE\bfseries\sffamily,
-          text width=0.9\paperwidth,
-          align=left
-        ] at ([yshift=-2cm]current page.north west) % Posición segura en página
-        {\chaptername~\thechapter\quad #1};
+          anchor=north west,                % Ancla la esquina superior izquierda
+          rounded corners=2pt,             % Bordes redondeados
+          minimum height=6ex,              % Altura mínima del recuadro
+          draw=Chaptercolor,               % Borde del recuadro (mismo color que el relleno)
+          fill=Chaptercolor,               % Color de fondo del recuadro
+          text=white,                      % Color del texto
+          line width=1pt,                  % Grosor del borde
+          font=\LARGE\bfseries\sffamily,   % Fuente: grande, negrita y sans-serif
+          text width=0.9\paperwidth,       % Ancho del texto (90% del ancho del papel)
+          align=left                       % Alineación del texto a la izquierda
+        ] at ([yshift=-1.5cm]current page.north west)  % Posición del nodo (2 cm debajo de la parte superior)
+        {\chaptername~\thechapter\quad #1};          % Contenido del nodo: "Capítulo N Título"
     
-        \draw[very thick, color=Chaptercolor]
-          ([xshift=0.3mm, yshift=-0.3mm]current page.north west)
-          -- ([xshift=0.9\paperwidth]current page.north west);
+        % Línea decorativa horizontal (eliminada/comentada):
+        % \draw[very thick, color=Chaptercolor]
+        %   ([xshift=0.3mm, yshift=-0.3mm]current page.north west)
+        %   -- ([xshift=0.9\paperwidth]current page.north west);
+    
       \end{tikzpicture}
-      \vspace{7ex}
+      \vspace{-2ex} % Espacio vertical después del título
       }
   
         % ====================
@@ -536,7 +664,7 @@
         {}                            
         {0pt}                         
         {\CustomChapterFormat}
-      \titlespacing*{\chapter}{0pt}{5pt}{8pt}
+      \titlespacing*{\chapter}{0pt}{0pt}{0pt}
     % ===============
     % Capítulo*
       \newcommand{\CustomUnnumberedChapterFormat}[1]{
@@ -588,7 +716,7 @@
      {}                            
      {0pt}                         
      {\CustomSectionFormat}
-     \titlespacing*{\section}{0pt}{10pt}{-25pt}
+     \titlespacing*{\section}{0pt}{18pt}{-8pt}
  
 
     % ===============
@@ -615,7 +743,7 @@
       {}                            
       {0pt}                         
       {\CustomSubsectionFormat}
-      \titlespacing*{\subsection}{0pt}{10pt}{-25pt}
+      \titlespacing*{\subsection}{0pt}{10pt}{-15pt}
 
     % ===============
     % Subsubsección
@@ -642,104 +770,132 @@
      {}                            
      {0pt}                         
      {\CustomSubsubsectionFormat}
-     \titlespacing*{\subsubsection}{0pt}{10pt}{-20pt}
+     \titlespacing*{\subsubsection}{-2pt}{15pt}{-23pt}
 
   
     % ===============
 
 % ============================================================
-% 8-hipervinculos
+% 6-hipervinculos
+  % Configuración general de hipervínculos con hyperref
+
   \hypersetup{ 
-      linktoc=all, 
-      bookmarksnumbered, 
-      bookmarksopen, 
-      hidelinks}
-
+    linktoc=all,             % Hace que tanto los títulos como los números en el índice sean hipervínculos
+    bookmarksnumbered,       % Añade numeración a los marcadores del PDF
+    bookmarksopen,           % Expande los marcadores al abrir el PDF
+    %hidelinks,               % Oculta recuadro de los enlaces
+    colorlinks=true,
+    linkcolor=linkcolor1,
+    urlcolor=urlcolor1,
+    citecolor=citecolor1
+    }
+  
+  % Configuración específica de marcadores (bookmarks) en el PDF
   \bookmarksetup{
-      addtohook={ 
-          \ifnum\bookmarkget{level}=0 
-          \bookmarksetup{color=red} 
-          \fi 
-          \ifnum\bookmarkget{level}=1 
-          \bookmarksetup{color=red} 
-          \fi 
-          \ifnum\bookmarkget{level}=2 
-          \bookmarksetup{color=red} 
-          \fi}}
- 
-
-% ============================================================
-% 9- Captions figuras y Tablas
-
-  \DeclareCaptionFont{custom}{\color{darkgray}\sffamily}
-  \captionsetup{
-      font=small,
-      skip=4pt,
-      labelfont=custom,
-      textfont=custom,
-      labelsep=colon
-  }
-  \captionsetup[sub]{
-      font=footnotesize,
-      skip=2pt,
-      labelfont=custom,
-      textfont=custom,
-      labelsep=colon
+    addtohook={                         % Hook que se ejecuta al agregar cada marcador
+      \ifnum\bookmarkget{level}=0       
+        \bookmarksetup{color=red}       
+      \fi
+      \ifnum\bookmarkget{level}=1       
+        \bookmarksetup{color=green}
+      \fi
+      \ifnum\bookmarkget{level}=2      
+        \bookmarksetup{color=purple}
+      \fi
+    }
   }
 
-
 % ============================================================
-% 10-Cambiar todas las matemáticas en línea a display math
- \everymath{\color{blue}\displaystyle}
-
-
-% ============================================================
-% 11-Cabecera/Pie de pagina
+% 7-Captions figuras y Tablas
+  
+  % Define una fuente personalizada para los captions (títulos de figuras/tablas)
+  \DeclareCaptionFont{custom}{\color{Text}\sffamily}
   % ==============================
-  % Limpia encabezados y pies, activa estilo fancy
-    \pagestyle{fancy}
-    \fancyhf{}
+  % Configuración general de captions
+    \captionsetup{
+      font=small,             % Tamaño de fuente del caption
+      skip=4pt,               % Espacio entre el caption y el objeto (figura/tabla)
+      labelfont=custom,       % Fuente para la etiqueta (por ejemplo, "Figura 1")
+      textfont=custom,        % Fuente para el texto del caption
+      labelsep=colon          % Separador entre etiqueta y texto (usa ":")
+    }
+  % ==============================
+  % Configuración específica para subfiguras/subtablas
+  
+    \captionsetup[sub]{
+      font=footnotesize,      % Tamaño más pequeño para captions de subfiguras
+      skip=2pt,               % Menor separación entre caption y objeto
+      labelfont=custom,       % Misma fuente personalizada
+      textfont=custom,
+      labelsep=colon
+    }
+  
+% ============================================================
+% 8-Matemáticas
+
+  % Permitir saltos de página en entornos de ecuación
+  \allowdisplaybreaks[2]  % Nivel 2 = moderado
+
+% ============================================================
+% 9-Encabezados y Pies de página
+  % Activar estilo fancy y limpiar encabezados/pies
+  \pagestyle{fancy}
+  \fancyhf{}
+
   % ==============================
   % Encabezado
-   \fancyhead[LO]{\textcolor{Text1}{\footnotesize\itshape\leftmark}} % odd pages (derecha)
-   \fancyhead[RE]{\textcolor{Text1}{\footnotesize\itshape\leftmark}} % even pages (izquierda)
-  % ==============================
-  % 26-Pie de pagina
-    % Número de página centrado en recuadro con estilo personalizado
-    \fancyfoot[C]{%
-      \tikz[baseline=-0.8ex]{%
-        \node[
-          sharp corners,
-          inner sep=3pt,
-          fill=Chaptercolor,
-          text=white,
-          font=\normalsize\bfseries\sffamily,
-          text width=4ex,
-          align=center
-        ]{\thepage};
-      }
-    }
-    
-    % Frase pie de página en páginas impares (izquierda y derecha)
-    \fancyfoot[LO]{\textcolor{Text1}{\footnotesize\itshape Frase izquierda}}
-    \fancyfoot[RE]{\textcolor{Text1}{\footnotesize\itshape Frase derecha}}
-    
-    % Actualiza \leftmark con capítulos para encabezados
-    \renewcommand{\chaptermark}[1]{\markboth{\thechapter\quad #1}{}}
-    
-    % Regla personalizada para notas al pie
-    \def\footnoterule{%
-      \kern -3pt
-      \textcolor{blue}{\hrule width \linewidth height 0.4pt}
-      \kern 2.6pt
-    }
-    
-    % Formato del número de nota al pie: negrita, sans serif, negro, entre paréntesis
-    \def\thefootnote{\color{black}\bfseries\sffamily(\arabic{footnote})}
 
+    % Muestra el nombre del capítulo en páginas pares e impares
+    \fancyhead[LO]{\textcolor{Text}{\footnotesize\itshape\leftmark}} % Página impar (izquierda)
+    \fancyhead[RE]{\textcolor{Text}{\footnotesize\itshape\leftmark}} % Página par (derecha)
+    
+    % Actualiza el valor de \leftmark con capítulo + título
+    \renewcommand{\chaptermark}[1]{\markboth{\thechapter\quad #1}{}}
+  
+  % ==============================
+  % Pie de página
+    % ===============
+    % Número de página centrado, dentro de recuadro con estilo
+      \fancyfoot[C]{%
+        \tikz[baseline=-0.8ex]{%
+          \node[
+            sharp corners,
+            inner sep=3pt,
+            fill=Chaptercolor,
+            text=white,
+            font=\normalsize\bfseries\sffamily,
+            text width=4ex,
+            align=center
+          ]{\thepage};
+        }
+      }
+    % ===============
+    % Frases personalizadas en esquinas inferiores
+      \fancyfoot[LO]{\textcolor{Text}{\footnotesize\itshape Frase izquierda}}  % Página impar
+      \fancyfoot[RE]{\textcolor{Text}{\footnotesize\itshape Frase derecha}}   % Página par
+    
+    % ===============
+    % Formato de notas al pie
+      % =======
+      % Línea horizontal antes de las notas al pie
+        \renewcommand{\footnoterule}{%
+          \kern -3pt
+          \textcolor{blue}{\hrule width \linewidth height 0.4pt}
+          \kern 2.6pt
+        }
+      % =======
+      % Formato del número de nota al pie: negrita, sans serif, negro, entre paréntesis
+        \def\thefootnote{\color{Text}\bfseries\sffamily(\arabic{footnote})}
+      % =======
+      % Tamaño de letra para footnotes
+        \renewcommand{\footnotesize}{\small}
+      % =======
+      % Evita reiniciar numeración de notas por capítulo
+        \counterwithout{footnote}{chapter}
+  
 % ============================================================
-% 12-Codigo
-  % Colores codigo
+% 10-Codigo(usa colorbox, colores de codigo definidos aqui)
+  % Colores codigo(Se repiten en diferentes lenguajes, por comodidad al definir un nuevo lenguaje lo dejo aqui)
     \definecolor{bashcmd}{RGB}{80, 150, 80}        % Comandos resaltados en listings (sudo, apt, etc.)
     \definecolor{bashbg}{RGB}{48, 10, 36}            % Fondo del tcolorbox
     \definecolor{bashbg1}{RGB}{25, 30, 45}           % Fondo del bloque de código listings
@@ -752,7 +908,7 @@
   % ============================================================
   % Estilos de código
       % ==============================  
-      % bash
+      % bash(color debian)
         \lstdefinestyle{bashstyle}{
         literate={\$}{{{\color{bashcmd}\$}}}1,     % Resalta el símbolo "$" del prompt en color bashcmd
         backgroundcolor=\color{bashbg1},           % Establece el color de fondo del bloque de código
@@ -764,7 +920,7 @@
         morekeywords={sudo,apt,cd,ls,mkdir},       % Añade palabras clave
         }
       % ==============================
-      % bash2
+      % bash2(color ubuntu)
         \lstdefinestyle{bashstyle2}{
         literate={\$}{{{\color{bashcmd}\$}}}1,     % Resalta el símbolo "$" del prompt en color bashcmd
         backgroundcolor=\color{bashbg},           % Establece el color de fondo del bloque de código
@@ -844,4 +1000,23 @@
       before upper={\setlength{\parskip}{2pt}},
       before skip=4pt, after skip=4pt
       }
-% ============================================================
+
+% =============================================================
+% 11-Bibliografía
+  
+  \DeclareLanguageMapping{spanish}{spanish-apa}
+  \DefineBibliographyExtras{spanish}{%
+    \protected\def\mkbibnamefamily#1{\textsc{#1}} % Apellidos en versalitas
+  }
+% =============================================================
+% 12-Contraportada
+  
+  \renewcommand{\maketitle}{%
+    \begin{center}
+      \today
+    \end{center}
+  }
+% =============================================================
+% 12-Comandos Definidos
+  \newcommand{\nochaptername}[1]{\textcolor{\tocchaptercolor}{#1}}%Para capitulos en indice
+% =============================================================
